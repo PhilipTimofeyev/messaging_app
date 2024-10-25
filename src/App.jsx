@@ -6,15 +6,15 @@ function App() {
 
   return (
     <>
-    <h1>Messenger</h1>
-      <nav>
-        <ul>
-          <li>
-            <Link to="signin">Sign in page</Link>
-          </li>
-        </ul>
-      </nav>
-    </>
+      <h1>Messenger</h1>
+        <nav>
+          <ul>
+            <li>
+              <Link to="signin">Sign in page</Link>
+            </li>
+          </ul>
+        </nav>
+      </>
   )
 }
 

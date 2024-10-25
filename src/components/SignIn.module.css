@@ -1,0 +1,39 @@
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    border: solid black 4px;
+    border-radius: 10px;
+    padding: 2rem 1.5rem;
+    gap: 2vh;
+    align-items: flex-end;
+    width: max-content;
+    margin: auto;
+    margin-top: 3rem;
+    justify-content: center;
+}
+
+.form h3 {
+    margin: 0;
+    margin: auto;
+}
+
+.form input {
+    font-size: 1.1rem
+}
+
+
+.formButtonLink {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    /* margin: auto; */
+    /* background-color: red; */
+}
+
+.form button {
+    width: 40%;
+    font-size: 1.1rem;
+    border-radius: 4px;
+}
