@@ -18,7 +18,7 @@ function App() {
         element: 
           <PrivateRoute isAuthenticated={userAuth} children={<MainPage/>} />,
         children: [
-          {path: '/profile', element: <Profile />},
+          {path: '/profile', element: <Profile user={userAuth.resource_owner} />},
         ],
       },
     {

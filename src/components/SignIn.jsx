@@ -33,6 +33,7 @@ function SignIn({ setUserAuth }) {
 
   useEffect(() => {
     setUserAuth(data)
+    console.log(data)
   }, [data])
 
     return (
