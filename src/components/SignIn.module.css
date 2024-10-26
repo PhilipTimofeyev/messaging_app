@@ -7,8 +7,9 @@
     border-radius: 10px;
     padding: 2rem 1.5rem;
     gap: 2vh;
-    align-items: flex-end;
+    align-items: center;
     width: max-content;
+    min-width: 15vw;
     margin: auto;
     margin-top: 3rem;
     justify-content: center;
@@ -21,7 +22,8 @@
 
 .form input {
     display: flex;    
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+    width: 15vw;
     border: none;
     border-radius: 5px;
     background-color: rgb(238, 238, 238);
@@ -45,4 +47,11 @@
     width: 40%;
     font-size: 1.1rem;
     border-radius: 4px;
+}
+
+.error {
+    /* margin-left: auto; */
+    color: red;
+    text-align: left;
+    font-size: .8rem;
 }

@@ -13,8 +13,8 @@ function SignIn () {
     const formData = new FormData(e.target)
     const email = formData.get('email')
     const password = formData.get('password')
-    console.log([email, password])
-    let response = await api()
+    // console.log([email, password])
+    let response = await api({email: email, password: password})
   }
 
     return (
@@ -66,13 +66,13 @@ export default SignIn
 //   const email = formData.get('email')
 //   console.log(email)
 //   setIsLoading(true);
-async function api() {
-    const requestOptions = {
+async function api({email: email, password: password}) {
+  const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        "email": "test2@development.com",
-        "password": "123456"
+        "email": {email},
+        "password": {password}
       })
     };
   try {
@@ -81,8 +81,6 @@ async function api() {
       throw new Error('Network response was not ok');
     }
     const jsonData = await response.json();
-    // setData(jsonData);
-    // let user = await login(event.target);
     console.log(jsonData)
     return jsonData
   } catch (error) {

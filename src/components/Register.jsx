@@ -55,8 +55,8 @@ function Register() {
                 <Link to="/signin">Sign in</Link>
                 <button type="submit">Sign up</button>
             </div>
-        </form>
           {error && <ErrorMessage error = {error}/>}
+        </form>
     </div>
   )
 }
