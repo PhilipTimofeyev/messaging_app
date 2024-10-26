@@ -1,12 +1,37 @@
-import React from 'react'
+import { React ,useState } from 'react'
 import { Navigate, Link } from "react-router-dom";
 import styles from "./SignIn.module.css"
+import { useApi }  from '../hooks/useApi.js'
 
 function Register() {
 
-    function handleSubmit() {
+    const [requestOptions, setRequestOptions] = useState()
+    const url = 'http://127.0.0.1:3000/users/tokens/sign_up'
 
+    const {data, isLoading, error} =  useApi(url, requestOptions)
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+
+        const formData = new FormData(e.target)
+        const email = formData.get('email')
+        const password = formData.get('password')
+        const password_confirmation = formData.get('password_confirmation')
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(
+                {
+                    "email": `${ email }`,
+                    "password": `${ password }`,
+                    "password_confirmation": `${ password_confirmation }`
+                }
+            )
+        };
+        setRequestOptions(requestOptions)
     }
+    
 
 
   return (
@@ -23,17 +48,26 @@ function Register() {
                 <input type="password" name="password" />
             </div>
             <div className={styles.formInput}>
-                <label htmlFor="confirm_password"><b>Confirm Password:</b> </label>
-                <input type="password" name="confirm_password" />
+                <label htmlFor="password_confirmation"><b>Confirm Password:</b> </label>
+                <input type="password" name="password_confirmation" />
             </div>
             <div className={styles.formButtonLink}>
                 <Link to="/signin">Sign in</Link>
                 <button type="submit">Sign up</button>
             </div>
         </form>
-      
+          {error && <ErrorMessage error = {error}/>}
     </div>
   )
+}
+
+
+function ErrorMessage({error}) {
+    const errors = error.map((err, idx) => <li key={idx}>{err}</li>)
+
+    return(
+        <div className={styles.error}>{errors}</div>
+    )
 }
 
 export default Register
