@@ -5,11 +5,13 @@ import './index.css'
 import App from './App.jsx'
 import SignIn from './components/SignIn.jsx';
 import Register from './components/Register.jsx';
+import PrivateRoute from "./components/PrivateRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: 
+      <PrivateRoute isAuthenticated={isAuthenticated}><App /></PrivateRoute>
   },
   {
     path: "signin",
