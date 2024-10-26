@@ -5,13 +5,20 @@ import './index.css'
 import App from './App.jsx'
 import SignIn from './components/SignIn.jsx';
 import Register from './components/Register.jsx';
+import Hmm from './components/Hmm.jsx';
 import PrivateRoute from "./components/PrivateRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: 
-      <PrivateRoute isAuthenticated={isAuthenticated}><App /></PrivateRoute>
+      <PrivateRoute isAuthenticated={false}>
+        <App />
+      </PrivateRoute>,
+    children: [
+      {path: '/', element: <App />},
+      {path: 'hmm', element: <Hmm />},
+    ],
   },
   {
     path: "signin",
