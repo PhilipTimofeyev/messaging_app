@@ -20,7 +20,16 @@
 }
 
 .form input {
-    font-size: 1.1rem
+    display: flex;    
+    font-size: 1.4rem;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(238, 238, 238);
+}
+
+.form label {
+    display: flex;
+    position: relative;
 }
 
 
