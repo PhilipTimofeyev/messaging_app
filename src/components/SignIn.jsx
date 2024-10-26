@@ -1,11 +1,14 @@
 import { React, useState, useEffect } from 'react'
 import { Navigate, Link } from "react-router-dom";
 import styles from "./SignIn.module.css"
+import { useApi } from '../hooks/useApi.js'
 
 function SignIn () {
 
-  const [user, setUser] = useState()
-  const [error, setError] = useState()
+  const [requestOptions, setRequestOptions] = useState()
+  const url = 'http://127.0.0.1:3000/users/tokens/sign_in'
+
+  const { data, isLoading, error } = useApi(url, requestOptions)
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -13,17 +16,23 @@ function SignIn () {
     const formData = new FormData(e.target)
     const email = formData.get('email')
     const password = formData.get('password')
-    // console.log([email, password])
-    let response = await api({email: email, password: password})
+
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(
+        {
+          "email": `${email}`,
+          "password": `${password}`
+        }
+      )
+    };
+    setRequestOptions(requestOptions)
   }
 
     return (
       <div>
         <h1>Sign In</h1>
-        {error && <p>{error.message}</p>}
-        {user && (
-          <Navigate to="/" replace={true} />
-        )}
         <form onSubmit={handleSubmit} className={styles.form}>
         <h3>Please sign in:</h3>
           <div className={styles.formInput}>
@@ -38,54 +47,21 @@ function SignIn () {
             <Link to="/register">Register</Link>
             <button type="submit">Sign In</button>
           </div>
+          {error && <ErrorMessage error={error} />}
         </form>
+        {data && (
+          <Navigate to="/" replace={true} />
+        )}
       </div>
     );
 }
 
-export default SignIn
+function ErrorMessage({ error }) {
+  const errMessages = error.map((err, idx) => <li key={idx}>{err}</li>)
 
-
-
-// API sketch
-// const [error, setError] = useState()
-// const [data, setData] = useState([]);
-// const [isLoading, setIsLoading] = useState(true);
-// async function handleSubmit(e) {
-//   event.preventDefault();
-//   const requestOptions = {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify({
-//       "email": "test2@development.com",
-//       "password": "123456"
-//     })
-//   };
-
-//   const formData = new FormData(e.target)
-//   const email = formData.get('email')
-//   console.log(email)
-//   setIsLoading(true);
-async function api({email: email, password: password}) {
-  const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "email": {email},
-        "password": {password}
-      })
-    };
-  try {
-    const response = await fetch('http://127.0.0.1:3000/users/tokens/sign_in', requestOptions);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const jsonData = await response.json();
-    console.log(jsonData)
-    return jsonData
-  } catch (error) {
-    // setError(error)
-  } finally {
-    // setIsLoading(false);
-  }
+  return (
+    <div className={styles.error}>{errMessages}</div>
+  )
 }
+
+export default SignIn

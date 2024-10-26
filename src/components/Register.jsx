@@ -38,7 +38,7 @@ function Register() {
     <div>
         <h1>Sign Up</h1>
         <form onSubmit={handleSubmit} className={styles.form}>
-            <h3>Please sign in:</h3>
+            <h3>Create a new account:</h3>
             <div className={styles.formInput}>
                 <label htmlFor="email"><b>Email:</b> </label>
                 <input type="email" name="email" />
@@ -53,20 +53,23 @@ function Register() {
             </div>
             <div className={styles.formButtonLink}>
                 <Link to="/signin">Sign in</Link>
-                <button type="submit">Sign up</button>
+                <button type="submit">Register</button>
             </div>
           {error && <ErrorMessage error = {error}/>}
         </form>
+          {data && (
+              <Navigate to="/" replace={true} />
+          )}
     </div>
   )
 }
 
 
 function ErrorMessage({error}) {
-    const errors = error.map((err, idx) => <li key={idx}>{err}</li>)
+    const errMessages = error.map((err, idx) => <li key={idx}>{err}</li>)
 
     return(
-        <div className={styles.error}>{errors}</div>
+        <div className={styles.error}>{errMessages}</div>
     )
 }
 

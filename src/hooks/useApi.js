@@ -20,8 +20,6 @@ export function useApi(url, requestOptions) {
         const jsonData = await response.json();
         setData(jsonData);
       } catch (err) {
-
-        console.log(err.cause) 
         setError(err.cause);
       } finally {
         setIsLoading(false);
