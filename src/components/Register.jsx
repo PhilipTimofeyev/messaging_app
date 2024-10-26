@@ -1,10 +1,10 @@
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import { Navigate, Link } from "react-router-dom";
 import styles from "./SignIn.module.css"
 import { useApi }  from '../hooks/useApi.js'
 import ErrorMessage  from './ErrorMessage.jsx'
 
-function Register() {
+function Register({ setUserAuth }) {
 
     const [requestOptions, setRequestOptions] = useState()
     const url = 'http://127.0.0.1:3000/users/tokens/sign_up'
@@ -32,6 +32,10 @@ function Register() {
         };
         setRequestOptions(requestOptions)
     }
+
+    useEffect(() => {
+        setUserAuth(data)
+    }, [data])
     
 
 
