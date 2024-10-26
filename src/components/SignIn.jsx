@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react'
 import { Navigate, Link } from "react-router-dom";
 import styles from "./SignIn.module.css"
 import { useApi } from '../hooks/useApi.js'
+import ErrorMessage from './ErrorMessage.jsx'
 
 function SignIn () {
 
@@ -54,14 +55,6 @@ function SignIn () {
         )}
       </div>
     );
-}
-
-function ErrorMessage({ error }) {
-  const errMessages = error.map((err, idx) => <li key={idx}>{err}</li>)
-
-  return (
-    <div className={styles.error}>{errMessages}</div>
-  )
 }
 
 export default SignIn
