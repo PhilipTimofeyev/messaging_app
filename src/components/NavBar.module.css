@@ -1,0 +1,22 @@
+
+
+.navBar {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 10rem;
+    background-color: lightcoral;
+    height: 4vh;
+}
+
+.navBar li {
+    display: flex;
+    gap: 2rem
+}
+
+.navBar ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}

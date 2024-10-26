@@ -5,6 +5,8 @@ import MainPage from './components/MainPage.jsx';
 import PrivateRoute from "./components/PrivateRoute";
 import SignIn from './components/SignIn.jsx';
 import Register from './components/Register.jsx';
+import Profile from './components/Profile.jsx'
+
 
 function App() {
 
@@ -14,9 +16,9 @@ function App() {
       {
         path: "/",
         element: 
-          <PrivateRoute isAuthenticated={userAuth}/>,
+          <PrivateRoute isAuthenticated={userAuth} children={<MainPage/>} />,
         children: [
-          {path: '/', element: <MainPage />},
+          {path: '/profile', element: <Profile />},
         ],
       },
     {
