@@ -3,12 +3,12 @@ import NavBar from './NavBar';
 import { Link, Outlet } from "react-router-dom";
 
 
-function MainPage() {
+function MainPage({ user, setUserAuth }) {
 
   return (
     <>
       <nav>
-        <NavBar/>
+        <NavBar user={user}/>
       </nav>
       <Outlet/>
     </>
