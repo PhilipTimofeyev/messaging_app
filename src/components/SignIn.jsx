@@ -4,7 +4,7 @@ import styles from "./SignIn.module.css"
 import { useApi } from '../hooks/useApi.js'
 import ErrorMessage from './ErrorMessage.jsx'
 
-function SignIn () {
+function SignIn ({authRef}) {
 
   const [requestOptions, setRequestOptions] = useState()
   const url = 'http://127.0.0.1:3000/users/tokens/sign_in'
@@ -30,6 +30,10 @@ function SignIn () {
     };
     setRequestOptions(requestOptions)
   }
+
+  // useEffect(() => {
+  //   authRef.current = data
+  // }, [data])
 
     return (
       <div>

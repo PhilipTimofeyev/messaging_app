@@ -1,22 +1,35 @@
 import { useState, useRef } from 'react'
-import { Outlet } from "react-router-dom";
+import { RouterProvider, createBrowserRouter, BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css'
-import { Link } from "react-router-dom";
+import MainPage from './components/MainPage.jsx';
+import PrivateRoute from "./components/PrivateRoute";
+import SignIn from './components/SignIn.jsx';
+import Register from './components/Register.jsx';
 
 function App() {
 
+  const router = createBrowserRouter([
+      {
+        path: "/",
+        element: 
+          <PrivateRoute isAuthenticated={true}/>,
+        children: [
+          {path: '/', element: <MainPage />},
+        ],
+      },
+    {
+      path: "signin",
+      element: <SignIn />,
+    },
+    {
+      path: "register",
+      element: <Register />,
+    },
+  ]);
+
   return (
     <>
-      <h1>Messenger</h1>
-      <nav>
-        <ul>
-          <li>
-            <Link to="signin">Sign in page</Link>
-            <Link to="hmm">Hmmmmm</Link>
-          </li>
-        </ul>
-      </nav>
-      {/* <Outlet /> */}
+      <RouterProvider router={router} />
     </>
   )
 }
