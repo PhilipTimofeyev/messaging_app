@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css'
 import MainPage from './components/MainPage.jsx';
@@ -11,6 +11,7 @@ import Profile from './components/Profile.jsx'
 function App() {
 
   const [userAuth, setUserAuth] = useState(null)
+  // const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   const router = createBrowserRouter([
       {

@@ -16,6 +16,7 @@ function NavBar({ user }) {
           headers: { 'Content-Type': 'application/json', "Authorization": "Bearer " + user.token },
         };
         setRequestOptions(requestOptions)
+        localStorage.removeItem("token")
     }
 
   return (

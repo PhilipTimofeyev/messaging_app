@@ -1,15 +1,16 @@
 import { React, useState, useEffect } from 'react'
-import { Navigate, Link } from "react-router-dom";
+import { Navigate, Link, useLocation } from "react-router-dom";
 import styles from "./SignIn.module.css"
 import { useApi } from '../hooks/useApi.js'
 import ErrorMessage from './ErrorMessage.jsx'
 
 function SignIn({ setUserAuth }) {
-
+  const [currentError, setCurrentError] = useState(null)
   const [requestOptions, setRequestOptions] = useState()
   const url = 'http://127.0.0.1:3000/users/tokens/sign_in'
 
   const { data, isLoading, error } = useApi(url, requestOptions)
+  const passedError = useLocation().state.error
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -33,8 +34,18 @@ function SignIn({ setUserAuth }) {
 
   useEffect(() => {
     setUserAuth(data)
-    console.log(data)
+    if (data) localStorage.setItem('token', data.token);
   }, [data])
+
+  useEffect(() => {
+    if (error) {
+      setCurrentError(error)
+    } else {
+      setCurrentError(passedError)
+    }
+  }, [error])
+
+
 
     return (
       <div>
@@ -53,7 +64,7 @@ function SignIn({ setUserAuth }) {
             <Link to="/register">Register</Link>
             <button type="submit">Sign In</button>
           </div>
-          {error && <ErrorMessage error={error} />}
+          {currentError && <ErrorMessage error={currentError} />}
         </form>
         {data && (
           <Navigate to="/" replace={true} />
