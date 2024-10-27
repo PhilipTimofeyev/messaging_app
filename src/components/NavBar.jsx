@@ -12,9 +12,10 @@ function NavBar({ user }) {
     const { data, isLoading, error } = useApi(url, requestOptions)
 
     async function handleSignOut() {
+      const accessToken = localStorage.getItem('accessToken');
         const requestOptions = {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', "Authorization": "Bearer " + user.token },
+          headers: { 'Content-Type': 'application/json', "Authorization": "Bearer " + accessToken },
         };
         setRequestOptions(requestOptions)
         localStorage.removeItem("token")

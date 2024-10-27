@@ -23,7 +23,9 @@ function SignIn({ setUserAuth }) {
       })
       .then((response) => {
         setUserAuth(response.data)
-        localStorage.setItem('token', response.data.token);
+        console.log(response.data.token)
+        localStorage.setItem('accessToken', response.data.token);
+        localStorage.setItem('refreshToken', response.data.refresh_token);
         navigate("/")
       }).catch(error => {
         setError(error)
