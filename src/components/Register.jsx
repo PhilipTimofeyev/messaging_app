@@ -1,17 +1,15 @@
 import { React, useState, useEffect } from 'react'
-import { Navigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import styles from "./SignIn.module.css"
-import { useApi }  from '../hooks/useApi.js'
+import axios from "axios";
 import ErrorMessage  from './ErrorMessage.jsx'
 
 function Register({ setUserAuth }) {
-
-    const [requestOptions, setRequestOptions] = useState()
+    const [error, setError] = useState()
+    const navigate = useNavigate()
     const url = 'http://127.0.0.1:3000/users/tokens/sign_up'
 
-    const {data, isLoading, error} =  useApi(url, requestOptions)
-
-    async function handleSubmit(e) {
+    function handleSubmit(e) {
         e.preventDefault();
 
         const formData = new FormData(e.target)
@@ -19,25 +17,21 @@ function Register({ setUserAuth }) {
         const password = formData.get('password')
         const password_confirmation = formData.get('password_confirmation')
 
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(
-                {
-                    "email": `${ email }`,
-                    "password": `${ password }`,
-                    "password_confirmation": `${ password_confirmation }`
-                }
-            )
-        };
-        setRequestOptions(requestOptions)
+        axios
+            .post(url, {
+                "email": `${email}`,
+                "password": `${password}`,
+                "password_confirmation": `${password_confirmation}`,
+
+            })
+            .then((response) => {
+                setUserAuth(response.data)
+                localStorage.setItem('token', response.data.token);
+                navigate("/")
+            }).catch(error => {
+                setError(error)
+            })
     }
-
-    useEffect(() => {
-        setUserAuth(data)
-    }, [data])
-    
-
 
   return (
     <div>
@@ -62,9 +56,6 @@ function Register({ setUserAuth }) {
             </div>
           {error && <ErrorMessage error = {error}/>}
         </form>
-          {data && (
-              <Navigate to="/" replace={true} />
-          )}
     </div>
   )
 }
