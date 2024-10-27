@@ -10,7 +10,9 @@ function SignIn({ setUserAuth }) {
   const url = 'http://127.0.0.1:3000/users/tokens/sign_in'
 
   const { data, isLoading, error } = useApi(url, requestOptions)
-  const passedError = useLocation().state.error
+  const passedError = useLocation().state
+
+  // if (useLocation()) const passedError = null
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -40,8 +42,8 @@ function SignIn({ setUserAuth }) {
   useEffect(() => {
     if (error) {
       setCurrentError(error)
-    } else {
-      setCurrentError(passedError)
+    } else if (passedError) {
+      setCurrentError(passedError.error)
     }
   }, [error])
 
