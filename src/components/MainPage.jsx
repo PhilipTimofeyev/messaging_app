@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react'
 import NavBar from './NavBar';
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useApi } from '../hooks/useApi.js'
 
 

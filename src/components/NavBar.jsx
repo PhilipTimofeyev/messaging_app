@@ -1,10 +1,11 @@
 import { React, useState, useEffect } from 'react'
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styles from './NavBar.module.css'
 import { useApi } from '../hooks/useApi.js'
 import { Navigate } from 'react-router-dom';
 
 function NavBar({ user }) {
+  const [currentPath, setCurrentPath] = useState(useLocation().pathname)
     const url = 'http://127.0.0.1:3000/users/tokens/revoke'
     const [requestOptions, setRequestOptions] = useState()
     

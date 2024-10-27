@@ -13,11 +13,13 @@ function App() {
   const [userAuth, setUserAuth] = useState(null)
   // const [isAuthenticated, setIsAuthenticated] = useState(false)
 
+  console.log(userAuth)
+
   const router = createBrowserRouter([
       {
         path: "/",
         element: 
-          <PrivateRoute isAuthenticated={userAuth} children={<MainPage user={userAuth} />} />,
+          <PrivateRoute userAuth={userAuth} setUserAuth={setUserAuth} children={<MainPage user={userAuth} />} />,
         children: [
           {path: '/profile', element: <Profile user={userAuth} />},
         ],
