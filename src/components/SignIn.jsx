@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from 'react'
-import { Navigate, Link, useLocation } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
+import axios from "axios";
 import styles from "./SignIn.module.css"
 import { useApi } from '../hooks/useApi.js'
 import ErrorMessage from './ErrorMessage.jsx'
@@ -9,43 +10,66 @@ function SignIn({ setUserAuth }) {
   const [requestOptions, setRequestOptions] = useState()
   const url = 'http://127.0.0.1:3000/users/tokens/sign_in'
 
-  const { data, isLoading, error } = useApi(url, requestOptions)
+  // const { data, isLoading, error } = useApi(url, requestOptions)
   const passedError = useLocation().state
+
+  const navigate = useNavigate()
+
+  function handleSubmit(e) {
+      e.preventDefault();
+
+      const formData = new FormData(e.target)
+      const email = formData.get('email')
+      const password = formData.get('password')
+
+    axios
+      .post(url, {
+        "email": `${email}`,
+        "password": `${password}`
+      })
+      .then((response) => {
+        console.log(response.data)
+        setUserAuth(response.data)
+        navigate("/")
+      });
+  }
 
   // if (useLocation()) const passedError = null
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  // async function handleSubmit(e) {
+  //   e.preventDefault();
 
-    const formData = new FormData(e.target)
-    const email = formData.get('email')
-    const password = formData.get('password')
+  //   const formData = new FormData(e.target)
+  //   const email = formData.get('email')
+  //   const password = formData.get('password')
 
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(
-        {
-          "email": `${email}`,
-          "password": `${password}`
-        }
-      )
-    };
-    setRequestOptions(requestOptions)
-  }
+  //   const requestOptions = {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify(
+  //       {
+  //         "email": `${email}`,
+  //         "password": `${password}`
+  //       }
+  //     )
+  //   };
+  //   setRequestOptions(requestOptions)
+  // }
 
-  useEffect(() => {
-    setUserAuth(data)
-    if (data) localStorage.setItem('token', data.token);
-  }, [data])
 
-  useEffect(() => {
-    if (error) {
-      setCurrentError(error)
-    } else if (passedError) {
-      setCurrentError(passedError.error)
-    }
-  }, [error])
+
+  // useEffect(() => {
+  //   setUserAuth(data)
+  //   if (data) localStorage.setItem('token', data.token);
+  // }, [data])
+
+  // useEffect(() => {
+  //   if (error) {
+  //     setCurrentError(error)
+  //   } else if (passedError) {
+  //     setCurrentError(passedError.error)
+  //   }
+  // }, [error])
 
 
 
@@ -68,9 +92,6 @@ function SignIn({ setUserAuth }) {
           </div>
           {currentError && <ErrorMessage error={currentError} />}
         </form>
-        {data && (
-          <Navigate to="/" replace={true} />
-        )}
       </div>
     );
 }
