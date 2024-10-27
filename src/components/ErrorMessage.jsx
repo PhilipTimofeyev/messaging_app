@@ -7,7 +7,8 @@ function ErrorMessage({ error }) {
 
     switch (error.status) {
         case 401:
-            console.log(error)
+        case 422:
+            console.log(errorDescription)
             // errorMessage = error.response.data.error
             errorDescription = errorDescription.map((err, idx) => <li key={idx}>{err}</li>)
             break;
