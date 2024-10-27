@@ -7,12 +7,10 @@ import ErrorMessage from './ErrorMessage.jsx'
 
 function SignIn({ setUserAuth }) {
   const [currentError, setCurrentError] = useState(null)
+  const navigate = useNavigate()
   const url = 'http://127.0.0.1:3000/users/tokens/sign_in'
 
-  // const { data, isLoading, error } = useApi(url, requestOptions)
-  const passedError = useLocation().state
-
-  const navigate = useNavigate()
+  // const passedError = useLocation().state
 
   function handleSubmit(e) {
       e.preventDefault();
@@ -27,53 +25,13 @@ function SignIn({ setUserAuth }) {
         "password": `${password}`
       })
       .then((response) => {
-        console.log(response.data)
         setUserAuth(response.data)
+        localStorage.setItem('token', response.data.token);
         navigate("/")
       }).catch(error => {
-        // console.log(error.response.data)
         setCurrentError(error)
       })
   }
-
-  // if (useLocation()) const passedError = null
-
-  // async function handleSubmit(e) {
-  //   e.preventDefault();
-
-  //   const formData = new FormData(e.target)
-  //   const email = formData.get('email')
-  //   const password = formData.get('password')
-
-  //   const requestOptions = {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify(
-  //       {
-  //         "email": `${email}`,
-  //         "password": `${password}`
-  //       }
-  //     )
-  //   };
-  //   setRequestOptions(requestOptions)
-  // }
-
-
-
-  // useEffect(() => {
-  //   setUserAuth(data)
-  //   if (data) localStorage.setItem('token', data.token);
-  // }, [data])
-
-  // useEffect(() => {
-  //   if (error) {
-  //     setCurrentError(error)
-  //   } else if (passedError) {
-  //     setCurrentError(passedError.error)
-  //   }
-  // }, [error])
-
-
 
     return (
       <div>
