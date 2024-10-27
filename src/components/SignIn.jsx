@@ -2,22 +2,19 @@ import { React, useState, useEffect } from 'react'
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import styles from "./SignIn.module.css"
-import { useApi } from '../hooks/useApi.js'
 import ErrorMessage from './ErrorMessage.jsx'
 
 function SignIn({ setUserAuth }) {
-  const [currentError, setCurrentError] = useState(null)
+  const [error, setError] = useState()
   const navigate = useNavigate()
   const url = 'http://127.0.0.1:3000/users/tokens/sign_in'
 
-  // const passedError = useLocation().state
-
   function handleSubmit(e) {
-      e.preventDefault();
+    e.preventDefault();
 
-      const formData = new FormData(e.target)
-      const email = formData.get('email')
-      const password = formData.get('password')
+    const formData = new FormData(e.target)
+    const email = formData.get('email')
+    const password = formData.get('password')
 
     axios
       .post(url, {
@@ -29,7 +26,7 @@ function SignIn({ setUserAuth }) {
         localStorage.setItem('token', response.data.token);
         navigate("/")
       }).catch(error => {
-        setCurrentError(error)
+        setError(error)
       })
   }
 
@@ -50,7 +47,7 @@ function SignIn({ setUserAuth }) {
             <Link to="/register">Register</Link>
             <button type="submit">Sign In</button>
           </div>
-          {currentError && <ErrorMessage error={currentError} />}
+          {error && <ErrorMessage error={error} />}
         </form>
       </div>
     );
