@@ -7,7 +7,6 @@ import ErrorMessage from './ErrorMessage.jsx'
 
 function SignIn({ setUserAuth }) {
   const [currentError, setCurrentError] = useState(null)
-  const [requestOptions, setRequestOptions] = useState()
   const url = 'http://127.0.0.1:3000/users/tokens/sign_in'
 
   // const { data, isLoading, error } = useApi(url, requestOptions)
@@ -31,7 +30,10 @@ function SignIn({ setUserAuth }) {
         console.log(response.data)
         setUserAuth(response.data)
         navigate("/")
-      });
+      }).catch(error => {
+        // console.log(error.response.data)
+        setCurrentError(error)
+      })
   }
 
   // if (useLocation()) const passedError = null

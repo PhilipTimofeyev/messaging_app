@@ -2,10 +2,25 @@ import { React } from 'react'
 import styles from "./SignIn.module.css"
 
 function ErrorMessage({ error }) {
-    const errMessages = error.map((err, idx) => <li key={idx}>{err}</li>)
+    let errorMessage
+    let errorDescription = error.response.data.error_description
 
+    switch (error.status) {
+        case 401:
+            console.log(error)
+            // errorMessage = error.response.data.error
+            errorDescription = errorDescription.map((err, idx) => <li key={idx}>{err}</li>)
+            break;
+        default:
+            console.log(error)
+            errorMessage = error.message
+    }
+     
     return (
-        <div className={styles.error}>{errMessages}</div>
+        <>
+            <h2 className={styles.error}>{errorMessage}</h2>
+            <div className={styles.error}>{errorDescription}</div>
+        </>
     )
 }
 
