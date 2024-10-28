@@ -13,7 +13,9 @@ function Users({ users }) {
     if (selectedUsers.find(user => user.id === userId)) return 
     setSelectedUsers([...selectedUsers, selectedUser])
     // Remove selected user from dropdown
-    setUserList(userList.filter(user => user.id !== userId));
+    // setUserList(userList.filter(user => user.id !== userId));
+    // Reset dropdown
+    setUserList([])
   }
 
   function removeSelectedUser(userId) {
@@ -28,15 +30,16 @@ function Users({ users }) {
   )
 
   function findUsers(value) {
-    console.log(value)
-    if (value === '') return setUserList([])
-
     let result = users.filter((user) => {
       return user.email.includes(value)
     })
 
     result = result.filter(user => !userInList(user))
     setUserList(result)
+  }
+
+  function handleInputFocus() {
+    setUserList(users)
   }
 
   function userInList(checkUser) {
@@ -50,12 +53,12 @@ function Users({ users }) {
   )
 
   return (
-    <div>
+    <div className={styles.usersContainer}>
       <label>
         Search Users: 
-        <input onChange={e => findUsers(e.target.value)}/>
+        <input onFocus={handleInputFocus}onChange={e => findUsers(e.target.value)}/>
       </label>
-      <ul>{userList && listUsers}</ul>
+      <ul className={styles.userList}>{userList && listUsers}</ul>
       <div className={styles.selectedUsers}>
       <h2>Send To:</h2>
       <ul>{listSelectedUsers}</ul>
