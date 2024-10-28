@@ -12,7 +12,7 @@ function MainPage({ user, users }) {
         <NavBar user={user}/>
       </nav>
       <Outlet/>
-      <h1>MESSAGE</h1>
+      <h1>Users</h1>
       <div>
         {users && <Users users={users}/>}
       </div>

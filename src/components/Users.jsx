@@ -8,7 +8,11 @@ function Users({ users }) {
 
   function handleClick(userId) {
     const selectedUser = users.find((user) => user.id === userId)
+    // Prevent adding same user multiple times
+    if (selectedUsers.find(user => user.id === userId)) return 
     setSelectedUsers([...selectedUsers, selectedUser])
+    // Remove selected user from dropdown
+    setUserList(userList.filter(user => user.id !== userId));
   }
 
   const listSelectedUsers = selectedUsers.map(user =>
@@ -18,11 +22,19 @@ function Users({ users }) {
   )
 
   function findUsers(value) {
-
+    console.log(value)
     if (value === '') return setUserList([])
 
-    const result = users.filter((user) => user.email.includes(value))
+    let result = users.filter((user) => {
+      return user.email.includes(value)
+    })
+
+    result = result.filter(user => !userInList(user))
     setUserList(result)
+  }
+
+  function userInList(checkUser) {
+    return selectedUsers.find(user => user.id === checkUser.id)
   }
 
   const listUsers = userList.map(user => 
@@ -34,7 +46,7 @@ function Users({ users }) {
   return (
     <div>
       <label>
-        Text input: 
+        Search Users: 
         <input 
         name="myInput"
           onChange={e => findUsers(e.target.value)}
