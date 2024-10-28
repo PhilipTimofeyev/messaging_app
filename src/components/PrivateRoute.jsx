@@ -2,7 +2,7 @@ import { Navigate, useNavigate, Outlet } from "react-router-dom";
 import { useState, useEffect } from 'react'
 import axios from "axios";
 
-const PrivateRoute = ({ children }) => {
+const PrivateRoute = ({ setUserAuth, children }) => {
     const navigate = useNavigate()
     const accessToken = localStorage.getItem('accessToken')
     
@@ -16,6 +16,7 @@ const PrivateRoute = ({ children }) => {
     
     useEffect(() => {
         axiosInstance.get('/users/tokens/info')
+        .then (response => setUserAuth(response.data))
         .catch(error => {
             navigate("/signin")
         })
