@@ -1,4 +1,5 @@
 import { React, useState } from 'react'
+import styles from './Users.module.css'
 
 function Users({ users }) {
 
@@ -15,9 +16,14 @@ function Users({ users }) {
     setUserList(userList.filter(user => user.id !== userId));
   }
 
+  function removeSelectedUser(userId) {
+    setSelectedUsers(selectedUsers.filter(user => user.id !== userId));
+  }
+
   const listSelectedUsers = selectedUsers.map(user =>
     <li key={user.id}>
-      <p>{user.email}</p>
+      {user.email}
+      <span><button onClick={() => removeSelectedUser(user.id)}>X</button></span>
     </li>
   )
 
@@ -47,13 +53,13 @@ function Users({ users }) {
     <div>
       <label>
         Search Users: 
-        <input 
-        name="myInput"
-          onChange={e => findUsers(e.target.value)}
-        />
+        <input onChange={e => findUsers(e.target.value)}/>
       </label>
       <ul>{userList && listUsers}</ul>
+      <div className={styles.selectedUsers}>
+      <h2>Send To:</h2>
       <ul>{listSelectedUsers}</ul>
+      </div>
     </div>
   )
 }
