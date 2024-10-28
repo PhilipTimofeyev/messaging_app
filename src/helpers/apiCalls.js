@@ -12,3 +12,9 @@ export const checkAuth = async () => {
         return error
     }
 };
+
+export const revokeToken = async () => {
+    const response = await axiosInstance.post('/users/tokens/revoke');
+    console.log('Successfully revoked token');
+    return response
+};
