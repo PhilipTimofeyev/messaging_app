@@ -1,11 +1,28 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, useNavigate, Outlet } from "react-router-dom";
+import { useState, useEffect } from 'react'
+import axios from "axios";
 
-const PrivateRoute = ({ isAuthenticated, children }) => {
-    const storedToken = localStorage.getItem('accessToken')
-
-    if (isAuthenticated || storedToken) return children
+const PrivateRoute = ({ children }) => {
+    const navigate = useNavigate()
+    const accessToken = localStorage.getItem('accessToken')
     
-    return <Navigate to="/signin" />;
+    const axiosInstance = axios.create({
+        baseURL: "http://127.0.0.1:3000",
+        headers: {
+            "Content-type": "application/json",
+            'Authorization': 'Bearer ' + accessToken
+        }
+    });
+    
+    useEffect(() => {
+        axiosInstance.get('/users/tokens/info')
+        .catch(error => {
+            navigate("/signin")
+        })
+    }, [])
+
+    return children
 }
+
 
 export default PrivateRoute;
