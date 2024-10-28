@@ -5,6 +5,8 @@ import { checkAuth } from "../helpers/apiCalls.js";
 const PrivateRoute = ({ setUser, children }) => {
     const navigate = useNavigate()
 
+    
+    
     useEffect(() => {
         const callAPI = async () => {
             const response = await checkAuth();

@@ -18,7 +18,7 @@ function App() {
       {
         path: "/",
         element: 
-          <PrivateRoute isAuthenticated={isAuthenticated} setUser={setUser} children={<MainPage user={user} />} />,
+          <PrivateRoute setUser={setUser} children={<MainPage user={user} />} />,
         children: [
           { path: '/profile', element: <Profile user={user} />},
         ],
