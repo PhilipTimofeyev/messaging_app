@@ -6,7 +6,6 @@ export const axiosInstance = axios.create({
         "Content-type": "application/json",
     }
 });
- export function refreshToken() {
     axiosInstance.interceptors.request.use(request => {
         const accessToken = localStorage.getItem('accessToken');
         if (accessToken) {
@@ -29,7 +28,6 @@ export const axiosInstance = axios.create({
                         url: 'http://127.0.0.1:3000/users/tokens/refresh',
                         headers: { 'Authorization': 'Bearer ' + refreshToken }
                     })
-
                     const accessToken = response.data.token
                     const newRefreshToken = response.data.refresh_token
 
@@ -51,4 +49,3 @@ export const axiosInstance = axios.create({
             return Promise.reject(error);
         }
     );
-}

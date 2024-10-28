@@ -23,7 +23,6 @@ function SignIn({ setUserAuth }) {
       })
       .then((response) => {
         setUserAuth(response.data)
-        console.log(response.data.token)
         localStorage.setItem('accessToken', response.data.token);
         localStorage.setItem('refreshToken', response.data.refresh_token);
         navigate("/")

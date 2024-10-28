@@ -6,30 +6,13 @@ import PrivateRoute from "./components/PrivateRoute";
 import SignIn from './components/SignIn.jsx';
 import Register from './components/Register.jsx';
 import Profile from './components/Profile.jsx'
-import { axiosInstance, refreshToken } from './helpers/refreshToken.js'
+import { axiosInstance } from './helpers/refreshToken.js'
 
 
 function App() {
 
   const [userAuth, setUserAuth] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-
-  function handleClick() {
-
-    refreshToken()
-
-    const fetchData = async () => {
-      try {
-        const response = await axiosInstance.get('/users/tokens/info');
-        setUserAuth(response.data)
-        console.log('Data successfully fetched:', response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    fetchData()
-    
-  }
 
   const router = createBrowserRouter([
       {
@@ -53,7 +36,6 @@ function App() {
   return (
     <>
       {<RouterProvider router={router} />}
-      <button onClick={handleClick}>Click me</button>
     </>
   )
 }

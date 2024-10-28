@@ -11,6 +11,7 @@ function MainPage({ user }) {
         <NavBar user={user}/>
       </nav>
       <Outlet/>
+      <h1>MESSAGE</h1>
     </>
   )
 }
