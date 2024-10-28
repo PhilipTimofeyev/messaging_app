@@ -11,25 +11,25 @@ import { axiosInstance } from './helpers/refreshToken.js'
 
 function App() {
 
-  const [userAuth, setUserAuth] = useState(null)
+  const [user, setUser] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   const router = createBrowserRouter([
       {
         path: "/",
         element: 
-          <PrivateRoute isAuthenticated={isAuthenticated} setUserAuth={setUserAuth} children={<MainPage user={userAuth} />} />,
+          <PrivateRoute isAuthenticated={isAuthenticated} setUser={setUser} children={<MainPage user={user} />} />,
         children: [
-          {path: '/profile', element: <Profile user={userAuth} />},
+          { path: '/profile', element: <Profile user={user} />},
         ],
       },
     {
       path: "signin",
-      element: <SignIn setUserAuth={setUserAuth}/>,
+      element: <SignIn setUser={setUser}/>,
     },
     {
       path: "register",
-      element: <Register setUserAuth={setUserAuth} />,
+      element: <Register setUser={setUser} />,
     },
   ]);
 

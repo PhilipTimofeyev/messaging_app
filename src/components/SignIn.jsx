@@ -4,7 +4,7 @@ import axios from "axios";
 import styles from "./SignIn.module.css"
 import ErrorMessage from './ErrorMessage.jsx'
 
-function SignIn({ setUserAuth }) {
+function SignIn({ setUser }) {
   const [error, setError] = useState()
   const navigate = useNavigate()
   const url = 'http://127.0.0.1:3000/users/tokens/sign_in'
@@ -22,7 +22,7 @@ function SignIn({ setUserAuth }) {
         "password": `${password}`
       })
       .then((response) => {
-        setUserAuth(response.data)
+        setUser(response.data)
         localStorage.setItem('accessToken', response.data.token);
         localStorage.setItem('refreshToken', response.data.refresh_token);
         navigate("/")

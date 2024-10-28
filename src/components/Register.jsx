@@ -4,7 +4,7 @@ import styles from "./SignIn.module.css"
 import axios from "axios";
 import ErrorMessage  from './ErrorMessage.jsx'
 
-function Register({ setUserAuth }) {
+function Register({ setUser }) {
     const [error, setError] = useState()
     const navigate = useNavigate()
     const url = 'http://127.0.0.1:3000/users/tokens/sign_up'
@@ -25,7 +25,7 @@ function Register({ setUserAuth }) {
 
             })
             .then((response) => {
-                setUserAuth(response.data)
+                setUser(response.data)
                 localStorage.setItem('token', response.data.token);
                 navigate("/")
             }).catch(error => {
