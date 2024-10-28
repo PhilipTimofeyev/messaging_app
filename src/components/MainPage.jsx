@@ -4,7 +4,7 @@ import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import Users from './Users';
 
 
-function MainPage({ user }) {
+function MainPage({ user, users }) {
 
   return (
     <>
@@ -14,7 +14,7 @@ function MainPage({ user }) {
       <Outlet/>
       <h1>MESSAGE</h1>
       <div>
-        <Users/>
+        {users && <Users users={users}/>}
       </div>
     </>
   )
