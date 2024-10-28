@@ -1,7 +1,6 @@
 import { React, useState, useEffect } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import styles from './NavBar.module.css'
-import axios from "axios";
 import { revokeToken } from "../helpers/apiCalls.js";
 
 function NavBar({ user }) {
