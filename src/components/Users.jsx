@@ -39,7 +39,8 @@ function Users({ users }) {
   }
 
   function handleInputFocus() {
-    setUserList(users)
+    const result = users.filter(user => !userInList(user))
+    setUserList(result)
   }
 
   function userInList(checkUser) {
@@ -58,7 +59,9 @@ function Users({ users }) {
         Search Users: 
         <input onFocus={handleInputFocus}onChange={e => findUsers(e.target.value)}/>
       </label>
-      <ul className={styles.userList}>{userList && listUsers}</ul>
+      <div className={styles.userList}>
+      <ul>{userList && listUsers}</ul>
+      </div>
       <div className={styles.selectedUsers}>
       <h2>Send To:</h2>
       <ul>{listSelectedUsers}</ul>
