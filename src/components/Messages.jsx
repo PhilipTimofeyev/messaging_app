@@ -1,24 +1,30 @@
 import React from 'react'
 import styles from './Messages.module.css'
-import { createMessage, addMessageToGroup } from "../helpers/apiCalls.js";
+import { createMessageAPI, addMessageToGroupAPI } from "../helpers/apiCalls.js";
 
 function Messages({ user, currentGroup, refreshGroup }) {
 
     async function handleSubmit(e) {
         e.preventDefault()
         const formData = new FormData(e.target)
-        const newMessage = formData.get('newMessage')
-        const response = await createMessage(newMessage);
-        const newMessageID = response.data.id
-        const hmm = await addMessageToGroup(newMessageID, currentGroup.group.id)
+        const content = formData.get('content')
+        const newMessage = await createMessage(content)
+        
+        addMessageToGroupAPI(newMessage.id, currentGroup.group.id)
         refreshGroup()
+    }
+
+    async function createMessage(content) {
+        const response = await createMessageAPI(content);
+        const newMessage = response.data
+        return newMessage
     }
 
   return (
     <div className={styles.messagesContainer}>
         {currentGroup && <MessagesWindow currentGroup={currentGroup}/>}
         <form onSubmit={handleSubmit} className={styles.form}>
-            <input type='newMessage' name='newMessage'></input>
+              <input type='content' name='content'></input>
             <button type="submit">Send</button>
         </form>
     </div>

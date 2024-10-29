@@ -52,7 +52,7 @@ export const getGroup = async (groupId) => {
     }
 };
 
-export const createMessage = async (messageContent) => {
+export const createMessageAPI = async (messageContent) => {
     try {
         const response = await axiosInstance.post(`/messages`, null, { params: {
             message: {content: messageContent}
@@ -65,7 +65,7 @@ export const createMessage = async (messageContent) => {
     }
 };
 
-export const addMessageToGroup = async (messageID, groupID) => {
+export const addMessageToGroupAPI = async (messageID, groupID) => {
     try {
         const response = await axiosInstance.patch(`/groups/${groupID}`, null, {
             params: {
