@@ -10,7 +10,7 @@ function Messages({ user, currentGroup, refreshGroup }) {
         const content = formData.get('content')
         const newMessage = await createMessage(content)
         
-        addMessageToGroupAPI(newMessage.id, currentGroup.group.id)
+        await addMessageToGroupAPI(newMessage.id, currentGroup.group.id)
         refreshGroup()
     }
 
@@ -44,7 +44,6 @@ function MessagesWindow({currentGroup, user}) {
             </li>
         )
     })
-
 
     return (
         <div className={styles.messagesWindow}>
