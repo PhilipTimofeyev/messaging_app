@@ -24,15 +24,17 @@ function MainPage({ user, users }) {
   }, [])
 
   useEffect(() => {
-    const callAPI = async () => {
-      const response = await getGroup(selectedGroup.id);
-      // setGroups(response.data)
-      console.log(response.data)
-      setCurrentGroup(response.data)
-    }
-    console.log(selectedGroup)
-    if (selectedGroup) callAPI()
+    
+    if (selectedGroup) refreshGroup()
   }, [selectedGroup])
+
+  async function refreshGroup() {
+    console.log("REFRESH")
+    const response = await getGroup(selectedGroup.id);
+    // setGroups(response.data)
+    console.log(response.data)
+    setCurrentGroup(response.data)
+  }
 
   return (
     <>
@@ -49,7 +51,7 @@ function MainPage({ user, users }) {
             {groups && <Groups groups={groups} setSelectedGroup={setSelectedGroup} />}
           </div>
         </div>
-      <div> <Messages currentGroup={currentGroup} /></div>
+        <div> <Messages currentGroup={currentGroup} refreshGroup={refreshGroup} /></div>
       </div>
     </>
   )

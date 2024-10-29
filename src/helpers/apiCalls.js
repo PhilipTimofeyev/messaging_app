@@ -51,3 +51,31 @@ export const getGroup = async (groupId) => {
         return error
     }
 };
+
+export const createMessage = async (messageContent) => {
+    try {
+        const response = await axiosInstance.post(`/messages`, null, { params: {
+            message: {content: messageContent}
+        }}) ;
+        // console.log('Data successfully fetched:', response.data);
+        return response
+    } catch (error) {
+        console.error('Error creating message:', error);
+        return error
+    }
+};
+
+export const addMessageToGroup = async (messageID, groupID) => {
+    try {
+        const response = await axiosInstance.patch(`/groups/${groupID}`, null, {
+            params: {
+                group: { message_id: messageID }
+            }
+        });
+        // console.log('Data successfully fetched:', response.data);
+        return response
+    } catch (error) {
+        console.error('Error creating message:', error);
+        return error
+    }
+};
