@@ -1,0 +1,11 @@
+
+
+.mainPageContainer{
+    display: flex;
+    /* flex-direction: column; */
+}
+
+.sidebarContainer {
+    display: flex;
+    flex-direction: column;
+}

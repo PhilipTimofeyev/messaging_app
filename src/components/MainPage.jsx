@@ -3,6 +3,8 @@ import NavBar from './NavBar';
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import Users from './Users';
 import Groups from './Groups';
+import Messages from './Messages';
+import styles from './MainPage.module.css'
 import { getGroups, getGroup } from "../helpers/apiCalls.js";
 
 
@@ -10,6 +12,7 @@ function MainPage({ user, users }) {
 
   const [groups, setGroups] = useState()
   const [selectedGroup, setSelectedGroup] = useState()
+  const [currentGroup, setCurrentGroup] = useState()
 
   useEffect(() => {
     const callAPI = async () => {
@@ -25,6 +28,7 @@ function MainPage({ user, users }) {
       const response = await getGroup(selectedGroup.id);
       // setGroups(response.data)
       console.log(response.data)
+      setCurrentGroup(response.data)
     }
     console.log(selectedGroup)
     if (selectedGroup) callAPI()
@@ -35,12 +39,17 @@ function MainPage({ user, users }) {
       <nav>
         <NavBar user={user}/>
       </nav>
-      <h1>Users</h1>
-      <div>
-        {users && <Users users={users}/>}
-      </div>
-      <div>
-        {groups && <Groups groups={groups} setSelectedGroup={setSelectedGroup} />}
+      <div className={styles.mainPageContainer}>
+        <div className={styles.sidebarContainer}>
+          <div>
+            <h1>Users</h1>
+            {users && <Users users={users}/>}
+          </div>
+          <div>
+            {groups && <Groups groups={groups} setSelectedGroup={setSelectedGroup} />}
+          </div>
+        </div>
+      <div> <Messages currentGroup={currentGroup} /></div>
       </div>
     </>
   )
