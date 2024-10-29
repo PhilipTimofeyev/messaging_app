@@ -9,4 +9,34 @@
 .messagesWindow {
     background-color: lightgoldenrodyellow;
     /* height: 20vh; */
+    padding: 1rem 3rem;
+}
+
+.currentUserMessage {
+    box-sizing: border-box;
+    border: solid lightseagreen;
+    border-radius: 10px;
+    width: 50%;
+    margin-left: auto;
+    text-align: end;
+    padding-right: 2rem
+    /* padding: 0 5rem; */
+}
+
+.otherUserMessage {
+        border: solid lightsalmon;
+        box-sizing: border-box;
+        border-radius: 10px;
+        width: 50%;
+        margin-right: auto;
+        text-align: start;
+        padding-left: 2rem
+}
+
+.messagesContainer li {
+    list-style: none;
+}
+
+.messagesWindow ul {
+    padding: 0;
 }

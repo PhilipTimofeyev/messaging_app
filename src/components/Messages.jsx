@@ -22,7 +22,7 @@ function Messages({ user, currentGroup, refreshGroup }) {
 
   return (
     <div className={styles.messagesContainer}>
-        {currentGroup && <MessagesWindow currentGroup={currentGroup}/>}
+        {currentGroup && <MessagesWindow user={user} currentGroup={currentGroup}/>}
         <form onSubmit={handleSubmit} className={styles.form}>
               <input type='content' name='content'></input>
             <button type="submit">Send</button>
@@ -32,19 +32,18 @@ function Messages({ user, currentGroup, refreshGroup }) {
 }
 
 
-function MessagesWindow({currentGroup}) {
+function MessagesWindow({currentGroup, user}) {
 
     const listMessages = currentGroup.messages.map((message) => {
         const messageUser = currentGroup.users.find(user => user.id === message.user_id)
-        console.log(messageUser)
+        const isCurrentUser = user.id == message.user_id
         return (
-        <li key={message.id}>
-            <p>{messageUser.email}</p>
-            <p>{message.content}</p>
-        </li>
+            <li key={message.id} className={isCurrentUser ? styles.currentUserMessage : styles.otherUserMessage}>
+                <p>{messageUser.email}</p>
+                <p>{message.content}</p>
+            </li>
         )
-    }
-    )
+    })
 
 
     return (

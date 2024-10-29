@@ -51,7 +51,7 @@ function MainPage({ user, users }) {
             {groups && <Groups groups={groups} setSelectedGroup={setSelectedGroup} />}
           </div>
         </div>
-        <div> <Messages currentGroup={currentGroup} refreshGroup={refreshGroup} /></div>
+        <div> <Messages currentGroup={currentGroup} refreshGroup={refreshGroup} user={user} /></div>
       </div>
     </>
   )
