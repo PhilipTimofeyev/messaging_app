@@ -29,3 +29,14 @@ export const getUsers = async () => {
         return error
     }
 };
+
+export const getGroups = async (userID) => {
+    try {
+        const response = await axiosInstance.get('/groups');
+        // console.log('Data successfully fetched:', response.data);
+        return response
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return error
+    }
+};
