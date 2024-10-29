@@ -1,6 +1,10 @@
 
 .usersContainer {
-    width: 14vw;
+    display: flex;
+    flex-direction: column;
+    min-width: 20rem;
+    /* min-width: 12vw; */
+    width: min-content
 }
 
 .selectedUsers {
@@ -9,6 +13,17 @@
 }
 
 .userList {
-    height: 10vh;
+    height: 14vh;
+    /* min-width: 22vw; */
     overflow-x: scroll;
+    padding: 0 2rem;
+}
+
+.userList li:hover {
+    background-color: lightgreen ;
+}
+
+.searchBar {
+    border: solid black;
+    padding: 1rem;
 }

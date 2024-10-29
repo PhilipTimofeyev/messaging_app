@@ -55,10 +55,12 @@ function Users({ users }) {
 
   return (
     <div className={styles.usersContainer}>
+      <div className={styles.searchBar}>
       <label>
         Search Users: 
-        <input onFocus={handleInputFocus}onChange={e => findUsers(e.target.value)}/>
+          <input onFocus={handleInputFocus} onChange={e => findUsers(e.target.value)}/>
       </label>
+      </div>
       <div className={styles.userList}>
       <ul>{userList && listUsers}</ul>
       </div>
