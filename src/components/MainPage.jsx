@@ -10,6 +10,8 @@ import { getGroups, getGroup } from "../helpers/apiCalls.js";
 
 function MainPage({ user, users }) {
 
+  console.log(user)
+
   const [groups, setGroups] = useState()
   const [selectedGroup, setSelectedGroup] = useState()
   const [currentGroup, setCurrentGroup] = useState()
@@ -51,7 +53,7 @@ function MainPage({ user, users }) {
             {groups && <Groups groups={groups} setSelectedGroup={setSelectedGroup} />}
           </div>
         </div>
-        <div> <Messages currentGroup={currentGroup} refreshGroup={refreshGroup} user={user} /></div>
+        {currentGroup && <Messages currentGroup={currentGroup} refreshGroup={refreshGroup} user={user} />}
       </div>
     </>
   )
