@@ -30,7 +30,7 @@ export const getUsers = async () => {
     }
 };
 
-export const getGroups = async (userID) => {
+export const getGroupsAPI = async (userID) => {
     try {
         const response = await axiosInstance.get('/groups');
         // console.log('Data successfully fetched:', response.data);
@@ -40,6 +40,22 @@ export const getGroups = async (userID) => {
         return error
     }
 };
+
+export const createGroupAPI = async (title, messageID, users) => {
+    try {
+        const response = await axiosInstance.post(`/groups`, null, {
+            params: {
+                group: { title: title, message_id: messageID, users: users }
+            }
+        });
+        // console.log('Data successfully fetched:', response.data);
+        return response
+    } catch (error) {
+        console.error('Error creating message:', error);
+        return error
+    }
+};
+
 
 export const getGroup = async (groupId) => {
     try {

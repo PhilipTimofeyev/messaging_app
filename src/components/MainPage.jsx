@@ -5,25 +5,24 @@ import Users from './Users';
 import Groups from './Groups';
 import Messages from './Messages';
 import styles from './MainPage.module.css'
-import { getGroups, getGroup } from "../helpers/apiCalls.js";
+import { getGroupsAPI, getGroup } from "../helpers/apiCalls.js";
 
 
 function MainPage({ user, users }) {
 
-  console.log(user)
-
   const [groups, setGroups] = useState()
   const [selectedGroup, setSelectedGroup] = useState()
   const [currentGroup, setCurrentGroup] = useState()
+  const [selectedUsers, setSelectedUsers] = useState([])
 
   useEffect(() => {
-    const callAPI = async () => {
-      const response = await getGroups();
-      setGroups(response.data)
-      console.log(response.data)
-    }
-    callAPI()
-  }, [])
+    getGroups()
+  }, [currentGroup])
+
+  const getGroups = async () => {
+    const response = await getGroupsAPI();
+    setGroups(response.data)
+  }
 
   useEffect(() => {
     
@@ -32,6 +31,7 @@ function MainPage({ user, users }) {
 
   async function refreshGroup() {
     console.log("REFRESH")
+    console.log("SELECTED", selectedGroup)
     const response = await getGroup(selectedGroup.id);
     // setGroups(response.data)
     console.log(response.data)
@@ -47,13 +47,13 @@ function MainPage({ user, users }) {
         <div className={styles.sidebarContainer}>
           <div>
             <h1>Users</h1>
-            {users && <Users users={users}/>}
+            {users && <Users users={users} selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers}/>}
           </div>
           <div>
-            {groups && <Groups groups={groups} setSelectedGroup={setSelectedGroup} />}
+            {groups && <Groups groups={groups} setSelectedGroup={setSelectedGroup} selectedUsers={selectedUsers} setCurrentGroup={setCurrentGroup} currentGroup={currentGroup}/>}
           </div>
         </div>
-        {currentGroup && <Messages currentGroup={currentGroup} refreshGroup={refreshGroup} user={user} />}
+        {currentGroup && <Messages currentGroup={currentGroup} refreshGroup={refreshGroup} user={user} selectedUsers={selectedUsers} setCurrentGroup={setCurrentGroup} setSelectedUsers={setSelectedUsers} setSelectedGroup={setSelectedGroup} />}
       </div>
     </>
   )

@@ -1,9 +1,8 @@
 import { React, useState } from 'react'
 import styles from './Users.module.css'
 
-function Users({ users }) {
+function Users({ users, selectedUsers, setSelectedUsers }) {
 
-  const [selectedUsers, setSelectedUsers] = useState([])
   const [userList, setUserList] = useState([])
   const [inputValue, setInputValue] = useState(null)
 

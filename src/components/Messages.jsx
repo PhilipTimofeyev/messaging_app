@@ -1,17 +1,26 @@
 import React from 'react'
 import styles from './Messages.module.css'
-import { createMessageAPI, addMessageToGroupAPI } from "../helpers/apiCalls.js";
+import { createMessageAPI, addMessageToGroupAPI, createGroupAPI } from "../helpers/apiCalls.js";
 
-function Messages({ user, currentGroup, refreshGroup }) {
+function Messages({ user, currentGroup, refreshGroup, selectedUsers, setCurrentGroup, setSelectedUsers, setSelectedGroup }) {
 
     async function handleSubmit(e) {
         e.preventDefault()
         const formData = new FormData(e.target)
         const content = formData.get('content')
         const newMessage = await createMessage(content)
-        
-        await addMessageToGroupAPI(newMessage.id, currentGroup.group.id)
-        refreshGroup()
+
+        if (currentGroup.messages.length == 0) {
+            const userIds = selectedUsers.map(user => user.id)
+            const response = await createGroupAPI('testgroup', newMessage.id, userIds)
+            setCurrentGroup(response.data)
+            setSelectedGroup(response.data.group)
+            // await refreshGroup()
+        } else {
+            await addMessageToGroupAPI(newMessage.id, currentGroup.group.id)
+            await refreshGroup()
+        }
+        setSelectedUsers([])
     }
 
     async function createMessage(content) {
@@ -28,6 +37,8 @@ function Messages({ user, currentGroup, refreshGroup }) {
         )
     })
 
+    function hmm() { console.log(currentGroup) }
+
   return (
     <div className={styles.messagesContainer}>
         <ul className={styles.messageUsers}>{listUsers}</ul>
@@ -36,6 +47,7 @@ function Messages({ user, currentGroup, refreshGroup }) {
             <input type='content' name='content'></input>
             <button type="submit">Send</button>
         </form>
+        <button onClick={hmm}>Hmmm</button>
     </div>
   )
 }
