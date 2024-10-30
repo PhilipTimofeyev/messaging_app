@@ -26,7 +26,7 @@ function Groups({ allGroups, message, selectedUsers, setCurrentGroup, currentGro
 
   async function createGroup() {
     const userIds = selectedUsers.map(user => user.id)
-    const response = await createGroupAPI('testgroup', message.id, userIds)
+    const response = await createGroupAPI('', message.id, userIds)
     return response
   }
 
@@ -35,18 +35,29 @@ function Groups({ allGroups, message, selectedUsers, setCurrentGroup, currentGro
     return response
   }
     
-  const listGroups = allGroups.map(group =>
-      <li key={group.group.id}>
-        <p onClick={() => clickGroup(group.group.id)}> {group.group.title}</p>
-      </li>
-  )
+  const ListGroups = () => {
+    return (
+      <ul>
+        {allGroups.map((group) => (
+          <li key={group.group.id} onClick={() => clickGroup(group.group.id)}>
+            {/* <h4> {group.group.title && group.group.title}</h4> */}
+            <ul>
+              {group.users.map((user) => (
+                < li key = { user.id } >
+                    <h5>{user.email}</h5>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
+    </ul>
+  )}
     
   return (
     <div>
       <h1>Groups</h1>
-      {/* <button onClick={createEmptyGroup}>New Group +</button> */}
       <div>
-        <ul>{allGroups && listGroups}</ul>
+        {allGroups && <ListGroups/>}
       </div>
     </div>
   )
