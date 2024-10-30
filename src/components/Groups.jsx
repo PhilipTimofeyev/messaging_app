@@ -1,11 +1,11 @@
 import { React, useEffect } from 'react'
 import { addMessageToGroupAPI, createGroupAPI, getGroup } from "../helpers/apiCalls.js";
 
-function Groups({ groups, message, selectedUsers, setCurrentGroup, currentGroup, setSelectedUsers }) {
+function Groups({ allGroups, message, selectedUsers, setCurrentGroup, currentGroup, setSelectedUsers }) {
 
   async function clickGroup(groupId) {
-    const selectedGroup = groups.find(group => group.id === groupId)
-    const response = await getGroup(selectedGroup.id);
+    const selectedGroup = allGroups.find(group => group.group.id === groupId)
+    const response = await getGroup(selectedGroup.group.id);
     setCurrentGroup(response.data)
   }
 
@@ -34,24 +34,19 @@ function Groups({ groups, message, selectedUsers, setCurrentGroup, currentGroup,
     const response = await addMessageToGroupAPI(message.id, currentGroup.group.id)
     return response
   }
-
-  function createEmptyGroup() {
-    const newGroup = {group: {}, users: selectedUsers, messages: []}
-    setCurrentGroup(newGroup)
-  }
     
-  const listGroups = groups.map(group =>
-      <li key={group.id}>
-        <p onClick={() => clickGroup(group.id)}> {group.title}</p>
+  const listGroups = allGroups.map(group =>
+      <li key={group.group.id}>
+        <p onClick={() => clickGroup(group.group.id)}> {group.group.title}</p>
       </li>
   )
     
   return (
     <div>
       <h1>Groups</h1>
-      <button onClick={createEmptyGroup}>New Group +</button>
+      {/* <button onClick={createEmptyGroup}>New Group +</button> */}
       <div>
-            <ul>{groups && listGroups}</ul>
+        <ul>{allGroups && listGroups}</ul>
       </div>
     </div>
   )

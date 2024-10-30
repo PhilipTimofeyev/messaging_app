@@ -15,36 +15,52 @@ function MainPage({ user, users }) {
   const [selectedUsers, setSelectedUsers] = useState([])
   const [message, setMessage] = useState()
   const [userList, setUserList] = useState([])
+  const [allGroups, setAllGroups] = useState()
 
   useEffect(() => {
     getGroups()
   }, [currentGroup])
+
+  useEffect(() => {
+    if (groups) getAllGroups()
+  }, [groups])
 
   const getGroups = async () => {
     const response = await getGroupsAPI();
     setGroups(response.data)
   }
 
+  function createEmptyGroup() {
+    const newGroup = { group: {}, users: selectedUsers, messages: [] }
+    setCurrentGroup(newGroup)
+  }
+
+  const getAllGroups = async () => {
+    const promises = groups.map(async (group) => {
+      const groupData = await getGroup(group.id)
+      return await groupData.data
+    })
+    const groupsInfo = await Promise.all(promises)
+    setAllGroups(groupsInfo)
+  }
+
   useEffect(() => {
-    const fetchData = async () => {
-      const promises =  groups.map(async(group) => {
-        const groupData = await getGroup(group.id)
-        return await groupData.data
-      })
-
-      const groupUsers = await Promise.all(promises)
-
-      const matchedGroups = groupUsers.filter((group) => {
+    function showGroupsWithSelectedUsers() {
+      const matchedGroups = allGroups.filter((group) => {
         const userListIds = selectedUsers.map(user => user.id)
         userListIds.push(user.id)
         const groupIds = group.users.map(user => user.id)
         return userListIds.every(id => groupIds.includes(id))
       })
       setUserList([])
-      if (matchedGroups.length == 0) return
+      if (matchedGroups.length == 0) {
+        createEmptyGroup()
+        return
+      }
       setCurrentGroup(matchedGroups[0])
     }
-    if (selectedUsers.length > 0) fetchData()
+
+    if (selectedUsers.length > 0) showGroupsWithSelectedUsers()
 }, [selectedUsers])
 
   return (
@@ -57,7 +73,7 @@ function MainPage({ user, users }) {
             {users && <Users users={users} userList={userList} setUserList={setUserList} selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers}/>}
           </div>
           <div>
-            {groups && <Groups setSelectedUsers={setSelectedUsers} message={message} groups={groups} selectedUsers={selectedUsers} setCurrentGroup={setCurrentGroup} currentGroup={currentGroup}/>}
+            {allGroups && <Groups setSelectedUsers={setSelectedUsers} message={message} allGroups={allGroups} selectedUsers={selectedUsers} setCurrentGroup={setCurrentGroup} currentGroup={currentGroup}/>}
           </div>
         </div>
         {currentGroup && <Messages setMessage={setMessage} currentGroup={currentGroup} user={user} />}
