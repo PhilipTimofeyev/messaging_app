@@ -2,24 +2,22 @@ import React from 'react'
 import styles from './Messages.module.css'
 import { createMessageAPI, addMessageToGroupAPI, createGroupAPI } from "../helpers/apiCalls.js";
 
-function Messages({ user, currentGroup, refreshGroup, selectedUsers, setCurrentGroup, setSelectedUsers, setSelectedGroup }) {
+function Messages({ user, currentGroup, selectedUsers, setSelectedUsers, setSelectedGroup }) {
 
     async function handleSubmit(e) {
         e.preventDefault()
         const formData = new FormData(e.target)
         const content = formData.get('content')
         const newMessage = await createMessage(content)
+        let response
 
         if (currentGroup.messages.length == 0) {
             const userIds = selectedUsers.map(user => user.id)
-            const response = await createGroupAPI('testgroup', newMessage.id, userIds)
-            setCurrentGroup(response.data)
-            setSelectedGroup(response.data.group)
-            // await refreshGroup()
+            response = await createGroupAPI('testgroup', newMessage.id, userIds)
         } else {
-            await addMessageToGroupAPI(newMessage.id, currentGroup.group.id)
-            await refreshGroup()
+            response = await addMessageToGroupAPI(newMessage.id, currentGroup.group.id)
         }
+        setSelectedGroup(response.data.group)
         setSelectedUsers([])
     }
 

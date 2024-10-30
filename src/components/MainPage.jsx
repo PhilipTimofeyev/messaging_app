@@ -34,7 +34,7 @@ function MainPage({ user, users }) {
     console.log("SELECTED", selectedGroup)
     const response = await getGroup(selectedGroup.id);
     // setGroups(response.data)
-    console.log(response.data)
+    // console.log(response.data)
     setCurrentGroup(response.data)
   }
 
@@ -53,7 +53,7 @@ function MainPage({ user, users }) {
             {groups && <Groups groups={groups} setSelectedGroup={setSelectedGroup} selectedUsers={selectedUsers} setCurrentGroup={setCurrentGroup} currentGroup={currentGroup}/>}
           </div>
         </div>
-        {currentGroup && <Messages currentGroup={currentGroup} refreshGroup={refreshGroup} user={user} selectedUsers={selectedUsers} setCurrentGroup={setCurrentGroup} setSelectedUsers={setSelectedUsers} setSelectedGroup={setSelectedGroup} />}
+        {currentGroup && <Messages currentGroup={currentGroup} user={user} selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers} setSelectedGroup={setSelectedGroup} />}
       </div>
     </>
   )

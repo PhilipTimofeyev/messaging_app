@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Groups({ groups, setSelectedGroup, selectedUsers, setCurrentGroup, currentGroup }) {
+function Groups({ groups, setSelectedGroup, selectedUsers, setCurrentGroup, refreshGroup }) {
 
   function clickGroup(groupId) {
     const group = groups.find(group => group.id === groupId)
