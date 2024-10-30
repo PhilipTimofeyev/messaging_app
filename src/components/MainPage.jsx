@@ -50,7 +50,7 @@ function MainPage({ user, users }) {
         const userListIds = selectedUsers.map(user => user.id)
         userListIds.push(user.id)
         const groupIds = group.users.map(user => user.id)
-        return userListIds.every(id => groupIds.includes(id))
+        return groupIds.every(id => userListIds.includes(id))
       })
       setUserList([])
       if (matchedGroups.length == 0) {
