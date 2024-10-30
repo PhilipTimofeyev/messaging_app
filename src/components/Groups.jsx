@@ -1,15 +1,15 @@
 import { React, useEffect } from 'react'
-import { addMessageToGroupAPI, createGroupAPI } from "../helpers/apiCalls.js";
+import { addMessageToGroupAPI, createGroupAPI, getGroup } from "../helpers/apiCalls.js";
 
-function Groups({ groups, message, setSelectedGroup, selectedUsers, setCurrentGroup, currentGroup, setSelectedUsers }) {
+function Groups({ groups, message, selectedUsers, setCurrentGroup, currentGroup, setSelectedUsers }) {
 
-  function clickGroup(groupId) {
-    const group = groups.find(group => group.id === groupId)
-    setSelectedGroup(group)
+  async function clickGroup(groupId) {
+    const selectedGroup = groups.find(group => group.id === groupId)
+    const response = await getGroup(selectedGroup.id);
+    setCurrentGroup(response.data)
   }
 
   useEffect(() => {
-    if (message) {
     const callGroup = async () => {
       let response
       // Check if new group vs used group
@@ -18,10 +18,10 @@ function Groups({ groups, message, setSelectedGroup, selectedUsers, setCurrentGr
       } else {
         response = await updateGroup()
       }
-      setSelectedGroup(response.data.group)
+      setCurrentGroup(response.data)
       setSelectedUsers([])
     }
-      callGroup()}
+    if (message) {callGroup()}
   }, [message])
 
   async function createGroup() {

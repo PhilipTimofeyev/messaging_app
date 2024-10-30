@@ -10,10 +10,6 @@ function Users({ users, selectedUsers, setSelectedUsers, setUserList, userList})
     // Prevent adding same user multiple times
     if (selectedUsers.find(user => user.id === userId)) return 
     setSelectedUsers([...selectedUsers, selectedUser])
-    // Remove selected user from dropdown
-    // setUserList(userList.filter(user => user.id !== userId));
-    // Reset dropdown
-    // setUserList([])
   }
 
   function removeSelectedUser(userId) {
