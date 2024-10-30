@@ -73,7 +73,7 @@ function MainPage({ user, users }) {
             {users && <Users users={users} userList={userList} setUserList={setUserList} selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers}/>}
           </div>
           <div>
-            {allGroups && <Groups setSelectedUsers={setSelectedUsers} message={message} allGroups={allGroups} selectedUsers={selectedUsers} setCurrentGroup={setCurrentGroup} currentGroup={currentGroup}/>}
+            {allGroups && <Groups user={user} setSelectedUsers={setSelectedUsers} message={message} allGroups={allGroups} selectedUsers={selectedUsers} setCurrentGroup={setCurrentGroup} currentGroup={currentGroup}/>}
           </div>
         </div>
         {currentGroup && <Messages setMessage={setMessage} currentGroup={currentGroup} user={user} />}

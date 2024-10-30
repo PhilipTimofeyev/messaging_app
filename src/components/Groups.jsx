@@ -1,7 +1,7 @@
 import { React, useEffect } from 'react'
 import { addMessageToGroupAPI, createGroupAPI, getGroup } from "../helpers/apiCalls.js";
 
-function Groups({ allGroups, message, selectedUsers, setCurrentGroup, currentGroup, setSelectedUsers }) {
+function Groups({ allGroups, message, selectedUsers, setCurrentGroup, currentGroup, setSelectedUsers, user }) {
 
   async function clickGroup(groupId) {
     const selectedGroup = allGroups.find(group => group.group.id === groupId)
@@ -30,6 +30,8 @@ function Groups({ allGroups, message, selectedUsers, setCurrentGroup, currentGro
     return response
   }
 
+  console.log(user)
+
   async function updateGroup() {
     const response = await addMessageToGroupAPI(message.id, currentGroup.group.id)
     return response
@@ -42,11 +44,14 @@ function Groups({ allGroups, message, selectedUsers, setCurrentGroup, currentGro
           <li key={group.group.id} onClick={() => clickGroup(group.group.id)}>
             {/* <h4> {group.group.title && group.group.title}</h4> */}
             <ul>
-              {group.users.map((user) => (
-                < li key = { user.id } >
-                    <h5>{user.email}</h5>
+              {group.users.map((groupUser) => {
+                if (groupUser.id !== user.id)
+                  return (
+                < li key={groupUser.id } >
+                  <h5>{groupUser.email}</h5>
                 </li>
-              ))}
+                  )
+              })}
             </ul>
           </li>
         ))}
