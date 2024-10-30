@@ -1,24 +1,15 @@
 import React from 'react'
 import styles from './Messages.module.css'
-import { createMessageAPI, addMessageToGroupAPI, createGroupAPI } from "../helpers/apiCalls.js";
+import { createMessageAPI } from "../helpers/apiCalls.js";
 
-function Messages({ user, currentGroup, selectedUsers, setSelectedUsers, setSelectedGroup }) {
+function Messages({ user, setMessage, currentGroup }) {
 
     async function handleSubmit(e) {
         e.preventDefault()
         const formData = new FormData(e.target)
         const content = formData.get('content')
         const newMessage = await createMessage(content)
-        let response
-
-        if (currentGroup.messages.length == 0) {
-            const userIds = selectedUsers.map(user => user.id)
-            response = await createGroupAPI('testgroup', newMessage.id, userIds)
-        } else {
-            response = await addMessageToGroupAPI(newMessage.id, currentGroup.group.id)
-        }
-        setSelectedGroup(response.data.group)
-        setSelectedUsers([])
+        setMessage(newMessage)
     }
 
     async function createMessage(content) {
@@ -35,8 +26,6 @@ function Messages({ user, currentGroup, selectedUsers, setSelectedUsers, setSele
         )
     })
 
-    function hmm() { console.log(currentGroup) }
-
   return (
     <div className={styles.messagesContainer}>
         <ul className={styles.messageUsers}>{listUsers}</ul>
@@ -45,11 +34,9 @@ function Messages({ user, currentGroup, selectedUsers, setSelectedUsers, setSele
             <input type='content' name='content'></input>
             <button type="submit">Send</button>
         </form>
-        <button onClick={hmm}>Hmmm</button>
     </div>
   )
 }
-
 
 function MessagesWindow({currentGroup, user}) {
 

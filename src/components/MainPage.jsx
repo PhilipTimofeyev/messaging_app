@@ -14,6 +14,7 @@ function MainPage({ user, users }) {
   const [selectedGroup, setSelectedGroup] = useState()
   const [currentGroup, setCurrentGroup] = useState()
   const [selectedUsers, setSelectedUsers] = useState([])
+  const [message, setMessage] = useState()
 
   useEffect(() => {
     getGroups()
@@ -30,11 +31,7 @@ function MainPage({ user, users }) {
   }, [selectedGroup])
 
   async function refreshGroup() {
-    console.log("REFRESH")
-    console.log("SELECTED", selectedGroup)
     const response = await getGroup(selectedGroup.id);
-    // setGroups(response.data)
-    // console.log(response.data)
     setCurrentGroup(response.data)
   }
 
@@ -50,10 +47,10 @@ function MainPage({ user, users }) {
             {users && <Users users={users} selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers}/>}
           </div>
           <div>
-            {groups && <Groups groups={groups} setSelectedGroup={setSelectedGroup} selectedUsers={selectedUsers} setCurrentGroup={setCurrentGroup} currentGroup={currentGroup}/>}
+            {groups && <Groups setSelectedUsers={setSelectedUsers} message={message} groups={groups} setSelectedGroup={setSelectedGroup} selectedUsers={selectedUsers} setCurrentGroup={setCurrentGroup} currentGroup={currentGroup}/>}
           </div>
         </div>
-        {currentGroup && <Messages currentGroup={currentGroup} user={user} selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers} setSelectedGroup={setSelectedGroup} />}
+        {currentGroup && <Messages setMessage={setMessage} currentGroup={currentGroup} user={user} />}
       </div>
     </>
   )

@@ -18,8 +18,6 @@ function App() {
     const callAPI = async () => {
       const response = await getUsers();
       setUsers(response.data)
-      console.log(response.data)
-      console.log(response.data)
     }
     callAPI()
   }, [])
