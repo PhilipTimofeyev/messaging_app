@@ -1,9 +1,8 @@
 import { React, useState } from 'react'
 import styles from './Users.module.css'
 
-function Users({ users, selectedUsers, setSelectedUsers }) {
+function Users({ users, selectedUsers, setSelectedUsers, setUserList, userList}) {
 
-  const [userList, setUserList] = useState([])
   const [inputValue, setInputValue] = useState(null)
 
   function handleClick(userId) {
@@ -14,7 +13,7 @@ function Users({ users, selectedUsers, setSelectedUsers }) {
     // Remove selected user from dropdown
     // setUserList(userList.filter(user => user.id !== userId));
     // Reset dropdown
-    setUserList([])
+    // setUserList([])
   }
 
   function removeSelectedUser(userId) {
