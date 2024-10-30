@@ -26,7 +26,6 @@ function MainPage({ user, users }) {
   }
 
   useEffect(() => {
-    
     if (selectedGroup) refreshGroup()
   }, [selectedGroup])
 
@@ -37,9 +36,7 @@ function MainPage({ user, users }) {
 
   return (
     <>
-      <nav>
-        <NavBar user={user}/>
-      </nav>
+      <NavBar user={user}/>
       <div className={styles.mainPageContainer}>
         <div className={styles.sidebarContainer}>
           <div>

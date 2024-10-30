@@ -35,7 +35,6 @@ function Groups({ groups, message, setSelectedGroup, selectedUsers, setCurrentGr
     return response
   }
 
-
   function createEmptyGroup() {
     const newGroup = {group: {}, users: selectedUsers, messages: []}
     setCurrentGroup(newGroup)
@@ -43,7 +42,7 @@ function Groups({ groups, message, setSelectedGroup, selectedUsers, setCurrentGr
     
   const listGroups = groups.map(group =>
       <li key={group.id}>
-      <p onClick={() => clickGroup(group.id)}> {group.title}</p>
+        <p onClick={() => clickGroup(group.id)}> {group.title}</p>
       </li>
   )
     
