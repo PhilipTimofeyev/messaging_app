@@ -20,8 +20,8 @@ function App() {
       const response = await getUsers();
       setUsers(response.data)
     }
-    callAPI()
-  }, [])
+    callAPI() 
+  }, [user])
 
   const router = createBrowserRouter([
       {
