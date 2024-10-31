@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css'
 import MainPage from './components/MainPage.jsx';
@@ -10,24 +10,25 @@ import NavBar from './components/NavBar';
 
 
 function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState()
 
   const router = createBrowserRouter([
     {
       path: "/",
       element: <PrivateRoute setUser={setUser} user={user}/>,
       children: 
-        [
-          { path: '/', 
-          element: <NavBar setUser={setUser} NavBar={NavBar} user={user}/>, 
+      [
+        { 
+          path: '/', 
+          element: <NavBar user={user}/>, 
           children: 
-            [
-              { path: '/', element: <MainPage user={user} /> },
-              { path: '/profile', element: <Profile user={user} />},
-            ],
-          },
-        ],
+          [
+            { path: '/', element: <MainPage user={user} /> },
+            { path: '/profile', element: <Profile user={user} />},
+          ],
         },
+      ],
+    },
     {
       path: "signin",
       element: <SignIn setUser={setUser}/>,

@@ -2,11 +2,11 @@ import {  useNavigate, Outlet } from "react-router-dom";
 import { useEffect } from 'react'
 import { checkAuth } from "../helpers/apiCalls.js";
 
-const PrivateRoute = ({ setUser, NavBar, user }) => {
+const PrivateRoute = ({ setUser,  user }) => {
     const navigate = useNavigate()
     
     useEffect(() => {
-        const callAPI = async () => {
+        const authenticateUser = async () => {
             const response = await checkAuth();
             const statusCode = response.status
             if (statusCode >= 200 && statusCode < 300) {
@@ -15,7 +15,7 @@ const PrivateRoute = ({ setUser, NavBar, user }) => {
                 navigate("/signin", { error: response })
             }
         }
-        if (!user) callAPI()
+        if (!user) authenticateUser()
             .catch(console.error);
     }, [])
 
