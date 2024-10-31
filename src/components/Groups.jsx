@@ -7,32 +7,30 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
   const [allGroups, setAllGroups] = useState()
   const allGroupsRef = useRef()
 
+  // Gets all groups for user
   const getGroups = async () => {
     const response = await getGroupsAPI();
     setGroups(response.data)
   }
 
+  // Gets info for each group of the user
   useEffect(() => {
-    getGroups()
-  }, [currentGroup])
-
-  useEffect(() => {
+    const getAllGroups = async () => {
+      let userGroups
+      const promises = groups.map(async (group) => {
+        userGroups = await getGroup(group.id)
+        return await userGroups.data
+      })
+      userGroups = await Promise.all(promises)      
+      const currentGroups = (selectedUsers.length === 0) ? userGroups : allGroupsRef.current
+      setAllGroups(currentGroups)
+    }
     if (groups) getAllGroups()
   }, [groups, selectedUsers])
 
-  const getAllGroups = async () => {
-    const promises = groups.map(async (group) => {
-      const groupsData = await getGroup(group.id)
-      return await groupsData.data
-    })
-    const groupsInfo = await Promise.all(promises)
-    
-    if (selectedUsers.length === 0) {
-      setAllGroups(groupsInfo)
-    } else {
-      setAllGroups(allGroupsRef.current)
-    }
-  }
+  useEffect(() => {
+    getGroups()
+  }, [currentGroup])
 
   function createEmptyGroup() {
     const newGroup = { group: {}, users: selectedUsers, messages: [] }
