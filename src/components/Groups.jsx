@@ -4,32 +4,26 @@ import { addMessageToGroupAPI, createGroupAPI, getGroup, getGroupsAPI } from "..
 function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSelectedUsers, user }) {
 
   const [groups, setGroups] = useState()
-  const [allGroups, setAllGroups] = useState()
-  const allGroupsRef = useRef()
+  const groupsRef = useRef()
 
-  // Gets all groups for user
+  // Gets all groups' info for user
   useEffect(() => {
     async function getGroups() {
+      // get all groups for user
       const response = await getGroupsAPI();
-      setGroups(response.data)
-    }
-    getGroups()
-  }, [currentGroup])
-
-  // Gets info for each group of the user
-  useEffect(() => {
-    async function getAllGroups() {
       let userGroups
-      const promises = groups.map(async (group) => {
+      // get info for each group
+      const promises = response.data.map(async (group) => {
         userGroups = await getGroup(group.id)
         return await userGroups.data
       })
       userGroups = await Promise.all(promises)      
-      const currentGroups = (selectedUsers.length === 0) ? userGroups : allGroupsRef.current
-      setAllGroups(currentGroups)
+      const currentGroups = (selectedUsers.length === 0) ? userGroups : groupsRef.current
+      setGroups(currentGroups)
     }
-    if (groups) getAllGroups()
-  }, [groups, selectedUsers])
+    getGroups()
+  }, [currentGroup, selectedUsers])
+
 
   function createEmptyGroup() {
     const newGroup = { group: {}, users: selectedUsers, messages: [] }
@@ -41,7 +35,7 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
 
       let matchedGroups = []
       let exactGroup
-      allGroups.forEach((group) => {
+      groups.forEach((group) => {
         const userListIds = selectedUsers.map(user => user.id)
         userListIds.push(user.id)
         const groupIds = group.users.map(user => user.id)
@@ -53,8 +47,7 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
           matchedGroups.push(group);
         }
       })
-      // console.log(selectedUsers.length)
-      allGroupsRef.current = matchedGroups
+      groupsRef.current = matchedGroups
 
       if (exactGroup) {
         setCurrentGroup(exactGroup)
@@ -69,7 +62,7 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
 
 
   async function clickGroup(groupId) {
-    const selectedGroup = allGroups.find(group => group.group.id === groupId)
+    const selectedGroup = groups.find(group => group.group.id === groupId)
     const response = await getGroup(selectedGroup.group.id);
     setCurrentGroup(response.data)
     setSelectedUsers([])
@@ -104,7 +97,7 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
   const ListGroups = () => {
     return (
       <ul>
-        {allGroups.map((group) => (
+        {groups.map((group) => (
           <li key={group.group.id} onClick={() => clickGroup(group.group.id)}>
             {/* <h4> {group.group.title && group.group.title}</h4> */}
             <ul>
@@ -126,7 +119,7 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
     <div>
       <h1>Groups</h1>
       <div>
-        {allGroups && <ListGroups/>}
+        {groups && <ListGroups/>}
       </div>
     </div>
   )
