@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react'
+import { React, useState, useEffect, useRef } from 'react'
 import NavBar from './NavBar';
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import Users from './Users';
@@ -16,6 +16,7 @@ function MainPage({ user, users }) {
   const [message, setMessage] = useState()
   const [userList, setUserList] = useState([])
   const [allGroups, setAllGroups] = useState()
+  const allGroupsRef = useRef()
 
   useEffect(() => {
     getGroups()
@@ -23,7 +24,7 @@ function MainPage({ user, users }) {
 
   useEffect(() => {
     if (groups) getAllGroups()
-  }, [groups])
+  }, [groups, selectedUsers])
 
   const getGroups = async () => {
     const response = await getGroupsAPI();
@@ -37,31 +38,49 @@ function MainPage({ user, users }) {
 
   const getAllGroups = async () => {
     const promises = groups.map(async (group) => {
-      const groupData = await getGroup(group.id)
-      return await groupData.data
+      const groupsData = await getGroup(group.id)
+      return await groupsData.data
     })
     const groupsInfo = await Promise.all(promises)
-    setAllGroups(groupsInfo)
+    
+    if (selectedUsers.length === 0) {
+      setAllGroups(groupsInfo)
+    } else {
+      setAllGroups(allGroupsRef.current)
+    }
   }
 
   useEffect(() => {
     function showGroupsWithSelectedUsers() {
-      const matchedGroups = allGroups.filter((group) => {
+
+      let matchedGroups = []
+      let exactGroup
+      allGroups.forEach((group) => {
         const userListIds = selectedUsers.map(user => user.id)
         userListIds.push(user.id)
         const groupIds = group.users.map(user => user.id)
-        return groupIds.every(id => userListIds.includes(id))
+        const isMatch =  userListIds.every(id => groupIds.includes(id))
+        if (isMatch && group.users.length === selectedUsers.length + 1) {
+          matchedGroups.push(group);
+          exactGroup = group
+        } else if (isMatch) {
+          matchedGroups.push(group);
+        }
       })
       setUserList([])
-      if (matchedGroups.length == 0) {
+      console.log(selectedUsers.length)
+      allGroupsRef.current = matchedGroups
+
+      if (exactGroup) {
+        setCurrentGroup(exactGroup)
+      } else {
         createEmptyGroup()
         return
       }
-      setCurrentGroup(matchedGroups[0])
     }
 
     if (selectedUsers.length > 0) showGroupsWithSelectedUsers()
-}, [selectedUsers])
+  }, [selectedUsers])
 
   return (
     <>

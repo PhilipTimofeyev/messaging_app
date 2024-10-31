@@ -7,6 +7,7 @@ function Groups({ allGroups, message, selectedUsers, setCurrentGroup, currentGro
     const selectedGroup = allGroups.find(group => group.group.id === groupId)
     const response = await getGroup(selectedGroup.group.id);
     setCurrentGroup(response.data)
+    setSelectedUsers([])
   }
 
   useEffect(() => {
@@ -29,8 +30,6 @@ function Groups({ allGroups, message, selectedUsers, setCurrentGroup, currentGro
     const response = await createGroupAPI('', message.id, userIds)
     return response
   }
-
-  console.log(user)
 
   async function updateGroup() {
     const response = await addMessageToGroupAPI(message.id, currentGroup.group.id)
