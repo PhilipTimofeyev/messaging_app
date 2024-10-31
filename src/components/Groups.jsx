@@ -1,5 +1,6 @@
 import { React, useState, useEffect, useRef } from 'react'
 import { addMessageToGroupAPI, createGroupAPI, getGroupAPI, getGroupsAPI } from "../helpers/apiCalls.js";
+import styles from './MainPage.module.css'
 
 function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSelectedUsers, user }) {
 
@@ -13,7 +14,7 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
 
       // get all groups for user
       const response = await getUserGroups();
-      
+
       // get info for each group
       const promises = response.map(async (group) => {
         userGroups = await getGroupAPI(group.id)
@@ -70,7 +71,7 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
 
   async function clickGroup(groupId) {
     const selectedGroup = groups.find(group => group.group.id === groupId)
-    const response = await getGroup(selectedGroup.group.id);
+    const response = await getGroupAPI(selectedGroup.group.id);
     setCurrentGroup(response.data)
     setSelectedUsers([])
   }
@@ -123,7 +124,7 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
   )}
     
   return (
-    <div>
+    <div className={styles.sidebarGroups}>
       <h1>Groups</h1>
       <div>
         {groups && <ListGroups/>}

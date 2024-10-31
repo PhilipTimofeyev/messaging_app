@@ -60,6 +60,7 @@ function Users({ selectedUsers, setSelectedUsers }) {
 
   return (
     <div className={styles.usersContainer}>
+                <h1>Users</h1>
       <div className={styles.searchBar}>
       <label>
         Search Users: 
