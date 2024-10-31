@@ -5,7 +5,6 @@ import Users from './Users';
 import Groups from './Groups';
 import Messages from './Messages';
 import styles from './MainPage.module.css'
-import { getGroupsAPI, getGroup } from "../helpers/apiCalls.js";
 
 
 function MainPage({ user }) {

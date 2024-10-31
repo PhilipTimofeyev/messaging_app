@@ -1,5 +1,5 @@
 import { React, useState, useEffect, useRef } from 'react'
-import { addMessageToGroupAPI, createGroupAPI, getGroup, getGroupsAPI } from "../helpers/apiCalls.js";
+import { addMessageToGroupAPI, createGroupAPI, getGroupAPI, getGroupsAPI } from "../helpers/apiCalls.js";
 
 function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSelectedUsers, user }) {
 
@@ -9,12 +9,14 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
   // Gets all groups' info for user
   useEffect(() => {
     async function getGroups() {
-      // get all groups for user
-      const response = await getGroupsAPI();
       let userGroups
+
+      // get all groups for user
+      const response = await getUserGroups();
+      
       // get info for each group
-      const promises = response.data.map(async (group) => {
-        userGroups = await getGroup(group.id)
+      const promises = response.map(async (group) => {
+        userGroups = await getGroupAPI(group.id)
         return await userGroups.data
       })
       userGroups = await Promise.all(promises)      
@@ -24,6 +26,11 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
     getGroups()
   }, [currentGroup, selectedUsers])
 
+  async function getUserGroups() {
+    // get all groups for user
+    const response = await getGroupsAPI();
+    return response.data
+  }
 
   function createEmptyGroup() {
     const newGroup = { group: {}, users: selectedUsers, messages: [] }
