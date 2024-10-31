@@ -6,6 +6,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import SignIn from './components/SignIn.jsx';
 import Register from './components/Register.jsx';
 import Profile from './components/Profile.jsx'
+import NavBar from './components/NavBar';
 import { getUsers } from "./helpers/apiCalls.js";
 
 
@@ -26,8 +27,9 @@ function App() {
       {
         path: "/",
         element: 
-          <PrivateRoute setUser={setUser} children={<MainPage user={user} users={users} />} />,
+          <PrivateRoute setUser={setUser} NavBar={NavBar} user={user}/>,
         children: [
+          { path: '/', element: <MainPage user={user} users={users} /> },
           { path: '/profile', element: <Profile user={user} />},
         ],
       },

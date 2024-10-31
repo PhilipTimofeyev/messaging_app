@@ -84,7 +84,7 @@ function MainPage({ user, users }) {
 
   return (
     <>
-      <NavBar user={user}/>
+      {/* <NavBar user={user}/> */}
       <div className={styles.mainPageContainer}>
         <div className={styles.sidebarContainer}>
           <div>

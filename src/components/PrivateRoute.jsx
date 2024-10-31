@@ -1,11 +1,9 @@
-import {  useNavigate } from "react-router-dom";
+import {  useNavigate, Outlet } from "react-router-dom";
 import { useEffect } from 'react'
 import { checkAuth } from "../helpers/apiCalls.js";
 
-const PrivateRoute = ({ setUser, children }) => {
+const PrivateRoute = ({ setUser, NavBar, user }) => {
     const navigate = useNavigate()
-
-    
     
     useEffect(() => {
         const callAPI = async () => {
@@ -21,7 +19,12 @@ const PrivateRoute = ({ setUser, children }) => {
             .catch(console.error);
     }, [])
 
-    return children
+    return (
+        <>
+        <NavBar user={user}/>
+        <Outlet/>
+        </>
+    )
 }
 
 
