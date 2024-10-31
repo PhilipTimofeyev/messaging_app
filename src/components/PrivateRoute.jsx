@@ -15,7 +15,7 @@ const PrivateRoute = ({ setUser, NavBar, user }) => {
                 navigate("/signin", { error: response })
             }
         }
-        callAPI()
+        if (!user) callAPI()
             .catch(console.error);
     }, [])
 
