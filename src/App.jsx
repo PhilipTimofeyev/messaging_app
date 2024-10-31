@@ -13,15 +13,21 @@ function App() {
   const [user, setUser] = useState(null)
 
   const router = createBrowserRouter([
-      {
-        path: "/",
-        element: 
-          <PrivateRoute setUser={setUser} NavBar={NavBar} user={user}/>,
-        children: [
-          { path: '/', element: <MainPage user={user} /> },
-          { path: '/profile', element: <Profile user={user} />},
+    {
+      path: "/",
+      element: <PrivateRoute setUser={setUser} user={user}/>,
+      children: 
+        [
+          { path: '/', 
+          element: <NavBar setUser={setUser} NavBar={NavBar} user={user}/>, 
+          children: 
+            [
+              { path: '/', element: <MainPage user={user} /> },
+              { path: '/profile', element: <Profile user={user} />},
+            ],
+          },
         ],
-      },
+        },
     {
       path: "signin",
       element: <SignIn setUser={setUser}/>,

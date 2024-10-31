@@ -5,7 +5,6 @@ import { getUsers } from "../helpers/apiCalls.js";
 function Users({ selectedUsers, setSelectedUsers, setUserList, userList }) {
 
   const [users, setUsers] = useState()
-  // const [inputValue, setInputValue] = useState(null)
 
   function handleClick(userId) {
     const selectedUser = users.find((user) => user.id === userId)

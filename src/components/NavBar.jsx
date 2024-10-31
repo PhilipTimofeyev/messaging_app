@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react'
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Outlet } from "react-router-dom";
 import styles from './NavBar.module.css'
 import { revokeToken } from "../helpers/apiCalls.js";
 
@@ -13,6 +13,7 @@ function NavBar({ user }) {
   }
 
   return (
+    <>
     <div className={styles.navBar}>
       <ul>
         <li>
@@ -22,6 +23,8 @@ function NavBar({ user }) {
         </li>
       </ul>
     </div>
+    <Outlet/>
+    </>
   )
 }
 

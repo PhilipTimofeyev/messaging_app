@@ -21,8 +21,7 @@ const PrivateRoute = ({ setUser, NavBar, user }) => {
 
     return (
         <>
-        <NavBar user={user}/>
-        <Outlet/>
+            <Outlet/>
         </>
     )
 }
