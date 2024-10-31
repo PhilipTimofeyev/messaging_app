@@ -1,9 +1,11 @@
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import styles from './Users.module.css'
+import { getUsers } from "../helpers/apiCalls.js";
 
-function Users({ users, selectedUsers, setSelectedUsers, setUserList, userList}) {
+function Users({ selectedUsers, setSelectedUsers, setUserList, userList }) {
 
-  const [inputValue, setInputValue] = useState(null)
+  const [users, setUsers] = useState()
+  // const [inputValue, setInputValue] = useState(null)
 
   function handleClick(userId) {
     const selectedUser = users.find((user) => user.id === userId)
@@ -11,6 +13,14 @@ function Users({ users, selectedUsers, setSelectedUsers, setUserList, userList})
     if (selectedUsers.find(user => user.id === userId)) return 
     setSelectedUsers([...selectedUsers, selectedUser])
   }
+
+  useEffect(() => {
+    const callAPI = async () => {
+      const response = await getUsers();
+      setUsers(response.data)
+    }
+    callAPI() 
+  }, [])
 
   function removeSelectedUser(userId) {
     setSelectedUsers(selectedUsers.filter(user => user.id !== userId));

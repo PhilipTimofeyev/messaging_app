@@ -84,12 +84,11 @@ function MainPage({ user, users }) {
 
   return (
     <>
-      {/* <NavBar user={user}/> */}
       <div className={styles.mainPageContainer}>
         <div className={styles.sidebarContainer}>
           <div>
             <h1>Users</h1>
-            {users && <Users users={users} userList={userList} setUserList={setUserList} selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers}/>}
+            {<Users users={users} userList={userList} setUserList={setUserList} selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers}/>}
           </div>
           <div>
             {allGroups && <Groups user={user} setSelectedUsers={setSelectedUsers} message={message} allGroups={allGroups} selectedUsers={selectedUsers} setCurrentGroup={setCurrentGroup} currentGroup={currentGroup}/>}
