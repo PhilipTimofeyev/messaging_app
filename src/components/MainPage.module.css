@@ -3,9 +3,51 @@
 .mainPageContainer{
     display: flex;
     /* flex-direction: column; */
+    background-color: rgb(107, 177, 163, .4);
+    /* height: 100vh; */
+    min-height: 95dvh;
 }
 
 .sidebarContainer {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: 16vw;
+    background-color: rgb(207, 213, 236);
+}
+
+/* GROUPS */
+
+.sidebarGroups h1 {
+    text-align: center;
+}
+
+.sidebarGroups ul {
+    list-style: none;
+    padding: .2rem 1rem;
+    /* width: 100%; */
+    margin: 1rem auto;
+    text-align: center;
+}
+
+.sidebarGroups ul ul {
+    background-color: rgb(103, 148, 148);
+    /* margin: 1rem 0; */
+    border-radius: 10px;
+    /* width: 50%; */
+    
+}
+
+.sidebarGroups li {
+   color: white;
+}
+
+.sidebarGroups ul li:hover {
+    font-size: 1.2rem;
+}
+
+/* MESSAGES */
+
+.messageWindow {
+    margin: auto;
 }
