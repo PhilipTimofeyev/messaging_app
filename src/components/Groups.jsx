@@ -8,14 +8,17 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
   const allGroupsRef = useRef()
 
   // Gets all groups for user
-  const getGroups = async () => {
-    const response = await getGroupsAPI();
-    setGroups(response.data)
-  }
+  useEffect(() => {
+    async function getGroups() {
+      const response = await getGroupsAPI();
+      setGroups(response.data)
+    }
+    getGroups()
+  }, [currentGroup])
 
   // Gets info for each group of the user
   useEffect(() => {
-    const getAllGroups = async () => {
+    async function getAllGroups() {
       let userGroups
       const promises = groups.map(async (group) => {
         userGroups = await getGroup(group.id)
@@ -27,10 +30,6 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
     }
     if (groups) getAllGroups()
   }, [groups, selectedUsers])
-
-  useEffect(() => {
-    getGroups()
-  }, [currentGroup])
 
   function createEmptyGroup() {
     const newGroup = { group: {}, users: selectedUsers, messages: [] }
