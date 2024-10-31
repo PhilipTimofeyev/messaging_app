@@ -17,10 +17,12 @@ function MainPage({ user }) {
     <>
       <div className={styles.mainPageContainer}>
         <div className={styles.sidebarContainer}>
-          <Users selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers}/>
           <Groups user={user} setSelectedUsers={setSelectedUsers} message={message}  selectedUsers={selectedUsers} setCurrentGroup={setCurrentGroup} currentGroup={currentGroup}/>
         </div>
+        <div>
+          <Users selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers}/>
           {currentGroup && <Messages setMessage={setMessage} currentGroup={currentGroup} user={user} />}
+          </div>
       </div>
     </>
   )
