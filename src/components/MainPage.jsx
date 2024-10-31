@@ -1,7 +1,7 @@
 import { React, useState, useEffect, useRef } from 'react'
 import NavBar from './NavBar';
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
-import Users from './Users';
+import Users from './Users/Users';
 import Groups from './Groups';
 import Messages from './Messages';
 import styles from './MainPage.module.css'
