@@ -19,7 +19,7 @@ export const revokeToken = async () => {
     return response
 };
 
-export const getUsers = async () => {
+export const getUsersAPI = async () => {
     try {
         const response = await axiosInstance.get('/users');
         // console.log('Data successfully fetched:', response.data);

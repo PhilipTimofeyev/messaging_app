@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react'
 import styles from './Users.module.css'
-import { getUsers } from "../helpers/apiCalls.js";
+import { getUsersAPI } from "../helpers/apiCalls.js";
 
 function Users({ selectedUsers, setSelectedUsers }) {
 
@@ -17,7 +17,7 @@ function Users({ selectedUsers, setSelectedUsers }) {
 
   useEffect(() => {
     const callAPI = async () => {
-      const response = await getUsers();
+      const response = await getUsersAPI();
       setUsers(response.data)
     }
     callAPI() 
