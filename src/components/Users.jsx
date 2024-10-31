@@ -2,15 +2,17 @@ import { React, useState, useEffect } from 'react'
 import styles from './Users.module.css'
 import { getUsers } from "../helpers/apiCalls.js";
 
-function Users({ selectedUsers, setSelectedUsers, setUserList, userList }) {
+function Users({ selectedUsers, setSelectedUsers }) {
 
   const [users, setUsers] = useState()
+  const [userList, setUserList] = useState([])
 
   function handleClick(userId) {
     const selectedUser = users.find((user) => user.id === userId)
     // Prevent adding same user multiple times
     if (selectedUsers.find(user => user.id === userId)) return 
     setSelectedUsers([...selectedUsers, selectedUser])
+    setUserList([])
   }
 
   useEffect(() => {

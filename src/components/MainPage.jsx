@@ -14,7 +14,6 @@ function MainPage({ user, users }) {
   const [currentGroup, setCurrentGroup] = useState()
   const [selectedUsers, setSelectedUsers] = useState([])
   const [message, setMessage] = useState()
-  const [userList, setUserList] = useState([])
   const [allGroups, setAllGroups] = useState()
   const allGroupsRef = useRef()
 
@@ -67,7 +66,6 @@ function MainPage({ user, users }) {
           matchedGroups.push(group);
         }
       })
-      setUserList([])
       console.log(selectedUsers.length)
       allGroupsRef.current = matchedGroups
 
@@ -88,7 +86,7 @@ function MainPage({ user, users }) {
         <div className={styles.sidebarContainer}>
           <div>
             <h1>Users</h1>
-            {<Users users={users} userList={userList} setUserList={setUserList} selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers}/>}
+            {<Users users={users} selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers}/>}
           </div>
           <div className={styles.sidebarGroups}>
             {allGroups && <Groups user={user} setSelectedUsers={setSelectedUsers} message={message} allGroups={allGroups} selectedUsers={selectedUsers} setCurrentGroup={setCurrentGroup} currentGroup={currentGroup}/>}
