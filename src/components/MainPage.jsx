@@ -90,11 +90,13 @@ function MainPage({ user, users }) {
             <h1>Users</h1>
             {<Users users={users} userList={userList} setUserList={setUserList} selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers}/>}
           </div>
-          <div>
+          <div className={styles.sidebarGroups}>
             {allGroups && <Groups user={user} setSelectedUsers={setSelectedUsers} message={message} allGroups={allGroups} selectedUsers={selectedUsers} setCurrentGroup={setCurrentGroup} currentGroup={currentGroup}/>}
           </div>
         </div>
-        {currentGroup && <Messages setMessage={setMessage} currentGroup={currentGroup} user={user} />}
+        <div className={styles.messageWindow}>
+          {currentGroup && <Messages setMessage={setMessage} currentGroup={currentGroup} user={user} />}
+        </div>
       </div>
     </>
   )
