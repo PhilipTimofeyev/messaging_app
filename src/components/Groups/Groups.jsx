@@ -1,6 +1,7 @@
 import { React, useState, useEffect, useRef } from 'react'
-import { addMessageToGroupAPI, createGroupAPI, getGroupAPI, getGroupsAPI } from "../helpers/apiCalls.js";
-import styles from './MainPage.module.css'
+import { addMessageToGroupAPI, createGroupAPI, getGroupAPI, getGroupsAPI } from "../../helpers/apiCalls.js";
+import Group from "./Group.jsx"
+import styles from '../MainPage.module.css'
 
 function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSelectedUsers, user }) {
 
@@ -121,16 +122,7 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
         {groups.map((group) => (
           <li key={group.group.id} onClick={() => clickGroup(group.group.id)}>
             {/* <h4> {group.group.title && group.group.title}</h4> */}
-            <ul>
-              {group.users.map((groupUser) => {
-                if (groupUser.id !== user.id)
-                  return (
-                < li key={groupUser.id } >
-                  <h4>{groupUser.email}</h4>
-                </li>
-                  )
-              })}
-            </ul>
+          <Group group={group} user={user}/>
           </li>
         ))}
     </ul>
@@ -139,9 +131,7 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
   return (
     <div className={styles.sidebarGroups}>
       <h1>Groups</h1>
-      <div>
         {groups && <ListGroups/>}
-      </div>
     </div>
   )
 }
