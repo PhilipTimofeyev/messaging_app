@@ -9,7 +9,7 @@ function SearchUsers({users, selectedUsers, setSelectedUsers}) {
 
   useEffect(() => {
     function findUsers(value) {
-      const result = users.filter(user => user.email.includes(value) && !userInList(user))
+      const result = users.filter(user => user.email.toLowerCase().includes(value.toLowerCase()) && !userInList(user))
       setUserList(result)
     }
     findUsers(searchInput)
