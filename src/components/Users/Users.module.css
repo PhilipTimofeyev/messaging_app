@@ -9,12 +9,38 @@
 /*    width: min-content*/
 }
 
+.usersContainer ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+
+
 .selectedUsers {
     display: flex;
+    align-items: center;
+/*    background-color: red;*/
 /*    flex-direction: column;*/
-    margin-top: 1rem;
-    background-color: lightblue;
+/*    margin-top: 1rem;*/
+/*    background-color: lightblue;*/
 }
+
+.selectedUsers ul {
+    display: flex;
+    gap: 2rem;
+}
+
+.listSelectedUsers li {
+    background-color: lightgoldenrodyellow;
+    padding: 10px 20px;
+    border-radius: 10px;
+    list-style: none;
+    font-weight: bold;
+}
+
+
 
 .searchContainer ul {
     position: absolute;
@@ -41,10 +67,6 @@
     padding: 0 5rem;
 }
 
-.userList li:hover {
-    background-color: lightgreen ;
-}
-
 .searchBar input {
     border: 1px solid grey;
     border-radius: 5px;
@@ -57,16 +79,16 @@
     font-size: 1.4rem;
 }
 
-.listUsers:focus {
-background-color: red;
-}
-
 .searchBar {
     display: flex;
     gap: 10px;
     position: relative;
 /*    border: solid black;*/
 /*    padding: 1rem;*/
+}
+
+input:placeholder-shown {
+   font-style: italic;
 }
 
 .searchBar input:hover, .searchBar input:focus {

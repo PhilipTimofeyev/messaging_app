@@ -126,7 +126,7 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
                 if (groupUser.id !== user.id)
                   return (
                 < li key={groupUser.id } >
-                  <h5>{groupUser.email}</h5>
+                  <h4>{groupUser.email}</h4>
                 </li>
                   )
               })}

@@ -4,8 +4,8 @@ import styles from './Users.module.css'
 function SearchUsers({users, selectedUsers, setSelectedUsers}) {
 
   const [userList, setUserList] = useState([])
-  const [searchInput, setSearchInput] = useState("Search user..")
-  const defaultSearch = 'Search user..'
+  const [searchInput, setSearchInput] = useState("")
+  const defaultSearch = ''
 
   useEffect(() => {
     function findUsers(value) {
@@ -43,7 +43,8 @@ function SearchUsers({users, selectedUsers, setSelectedUsers}) {
           <input onChange={e => setSearchInput(e.target.value)} 
                   onBlur={e => setSearchInput(defaultSearch)} 
                   onFocus={e => setSearchInput('')} 
-                  value={searchInput}/>
+                  value={searchInput}
+                  placeholder="Search users.." />
           {searchInput && <ul className={styles.listUsers}>{listUsers}</ul>}
         </div>
       </div>

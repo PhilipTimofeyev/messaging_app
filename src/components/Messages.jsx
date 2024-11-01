@@ -21,7 +21,7 @@ function Messages({ user, setMessage, currentGroup }) {
     const listUsers = currentGroup.users.map((user) => {
         return (
             <li key={user.id}>
-                <h4>{user.email}</h4>
+                <h2>{user.email}</h2>
             </li>
         )
     })
