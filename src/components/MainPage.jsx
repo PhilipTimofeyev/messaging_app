@@ -22,7 +22,7 @@ function MainPage({ user }) {
         <div>
           <Users selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers}/>
           {currentGroup && <Messages setMessage={setMessage} currentGroup={currentGroup} user={user} />}
-          </div>
+        </div>
       </div>
     </>
   )

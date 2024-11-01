@@ -7,7 +7,7 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
   const [groups, setGroups] = useState()
   const groupsRef = useRef()
 
-  // Gets all groups' info for user
+  // Gets user Groups
   useEffect(() => {
     async function getGroups() {
       let userGroups
@@ -20,9 +20,8 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
         userGroups = await getGroupAPI(group.id)
         return await userGroups.data
       })
-      userGroups = await Promise.all(promises)      
-      const currentGroups = (selectedUsers.length === 0) ? userGroups : groupsRef.current
-      setGroups(currentGroups)
+      userGroups = await Promise.all(promises)
+      groupsToShow(userGroups)
     }
     getGroups()
   }, [currentGroup, selectedUsers])
@@ -33,41 +32,55 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
     return response.data
   }
 
-  function createEmptyGroup() {
-    const newGroup = { group: {}, users: selectedUsers, messages: [] }
-    setCurrentGroup(newGroup)
+  function groupsToShow(userGroups) {
+    // Shows either all groups of user, or groups with selected users
+    const currentGroups = (selectedUsers.length === 0) ? userGroups : groupsRef.current
+    setGroups(currentGroups)
   }
 
+  // Updates groups with selected users
   useEffect(() => {
     function showGroupsWithSelectedUsers() {
-
-      let matchedGroups = []
-      let exactGroup
-      groups.forEach((group) => {
-        const userListIds = selectedUsers.map(user => user.id)
-        userListIds.push(user.id)
-        const groupIds = group.users.map(user => user.id)
-        const isMatch =  userListIds.every(id => groupIds.includes(id))
-        if (isMatch && group.users.length === selectedUsers.length + 1) {
-          matchedGroups.push(group);
-          exactGroup = group
-        } else if (isMatch) {
-          matchedGroups.push(group);
-        }
-      })
+      const {matchedGroups, exactGroup} = groupsWithSelectedUsers()
       groupsRef.current = matchedGroups
 
-      if (exactGroup) {
-        setCurrentGroup(exactGroup)
-      } else {
-        createEmptyGroup()
-        return
-      }
+      exactGroup ? setCurrentGroup(exactGroup) : setEmptyGroup()
     }
 
       if (selectedUsers.length > 0) showGroupsWithSelectedUsers()
     }, [selectedUsers])
 
+  function groupsWithSelectedUsers() {
+    let matchedGroups = []
+    let exactGroup
+
+    groups.forEach((group) => {
+      const userListIds = selectedUsersIds()
+      const groupIds = group.users.map(user => user.id)
+      const isMatch =  userListIds.every(id => groupIds.includes(id))
+      if (isMatch && group.users.length === selectedUsers.length + 1) {
+        matchedGroups.push(group);
+        exactGroup = group
+      } else if (isMatch) {
+        matchedGroups.push(group);
+      }
+    })
+
+    return {matchedGroups: matchedGroups, exactGroup: exactGroup}
+  }
+
+  function selectedUsersIds() {
+    const userListIds = selectedUsers.map(user => user.id)
+    // Make sure current user is in list
+    userListIds.push(user.id)
+
+    return userListIds
+  }
+
+  function setEmptyGroup() {
+    const newGroup = { group: {}, users: selectedUsers, messages: [] }
+    setCurrentGroup(newGroup)
+  }
 
   async function clickGroup(groupId) {
     const selectedGroup = groups.find(group => group.group.id === groupId)
