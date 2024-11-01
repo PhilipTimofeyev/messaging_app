@@ -1,9 +1,10 @@
-import { React, useState, useEffect } from 'react'
+import { React, useState, useEffect, useRef } from 'react'
 import styles from './Users.module.css'
 
 function SearchUsers({users, selectedUsers, setSelectedUsers}) {
 
   const [userList, setUserList] = useState([])
+  const [searchInput, setSearchInput] = useState("")
 
   function handleInputFocus() {
     const result = users.filter(user => !userInList(user))
@@ -12,8 +13,10 @@ function SearchUsers({users, selectedUsers, setSelectedUsers}) {
 
   function handleClick(userId) {
     const selectedUser = users.find((user) => user.id === userId)
+        console.log("COME ON")
     setSelectedUsers([...selectedUsers, selectedUser])
     setUserList([])
+    setSearchInput('')
   }
 
   function findUsers(value) {
@@ -21,9 +24,21 @@ function SearchUsers({users, selectedUsers, setSelectedUsers}) {
     setUserList(result)
   }
 
+  function handleOnChange(e) {
+    setSearchInput(e.target.value)
+  }
+
+  useEffect(() => {
+    findUsers(searchInput)
+  }, [searchInput])
+
+  function handleOnBlur() {
+    setSearchInput('')
+  }
+
   const listUsers = userList.map(user => 
     <li key={user.id}>
-      <p onClick={() => handleClick(user.id)}>{user.email}</p>
+      <p onMouseDown={() => handleClick(user.id)}>{user.email}</p>
     </li>
   )
 
@@ -35,9 +50,9 @@ function SearchUsers({users, selectedUsers, setSelectedUsers}) {
     <div className={styles.searchContainer}>
       <div className={styles.searchBar}>
         <div>
-        <input onFocus={handleInputFocus} onChange={e => findUsers(e.target.value)} defaultValue="Search users..."/>
-            <ul>{userList && listUsers}</ul>
-            </div>
+          <input onChange={handleOnChange} onBlur={handleOnBlur} value={searchInput} defaultValue={'Search user'}/>
+          {searchInput && <ul className={styles.listUsers}>{listUsers}</ul>}
+        </div>
       </div>
     </div>
   )
