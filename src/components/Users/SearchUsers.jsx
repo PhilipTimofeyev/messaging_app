@@ -7,8 +7,6 @@ function SearchUsers({users, selectedUsers, setSelectedUsers}) {
   const [searchInput, setSearchInput] = useState("")
   const defaultSearch = ''
 
-  console.log(userList)
-
   useEffect(() => {
     function findUsers(value) {
       const result = users.filter(user => user.email.toLowerCase().includes(value.toLowerCase()) && !userInList(user))

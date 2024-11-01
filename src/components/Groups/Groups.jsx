@@ -6,13 +6,14 @@ import styles from '../MainPage.module.css'
 function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSelectedUsers, user }) {
 
   const [groups, setGroups] = useState()
-  const groupsRef = useRef()
+  const matchedGroupsRef = useRef()
+  const userGroupsRef = useRef()
 
   // Gets user Groups
   useEffect(() => {
     async function getGroups() {
       let userGroups
-
+      
       // get all groups for user
       const response = await getUserGroups();
 
@@ -22,6 +23,7 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
         return await userGroups.data
       })
       userGroups = await Promise.all(promises)
+      userGroupsRef.current = userGroups
       groupsToShow(userGroups)
     }
     getGroups()
@@ -35,7 +37,7 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
 
   function groupsToShow(userGroups) {
     // Shows either all groups of user, or groups with selected users
-    const currentGroups = (selectedUsers.length === 0) ? userGroups : groupsRef.current
+    const currentGroups = (selectedUsers.length === 0) ? userGroups : matchedGroupsRef.current
     setGroups(currentGroups)
   }
 
@@ -43,7 +45,7 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
   useEffect(() => {
     function showGroupsWithSelectedUsers() {
       const {matchedGroups, exactGroup} = groupsWithSelectedUsers()
-      groupsRef.current = matchedGroups
+      matchedGroupsRef.current = matchedGroups
 
       exactGroup ? setCurrentGroup(exactGroup) : setEmptyGroup()
     }
@@ -52,25 +54,31 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
     }, [selectedUsers])
 
   function groupsWithSelectedUsers() {
+    const userListIds = selectedUsersIds()
+    // console.log(userListIds)
+
     let matchedGroups = []
     let exactGroup
 
-    groups.forEach((group) => {
-      const userListIds = selectedUsersIds()
+    userGroupsRef.current.forEach((group) => {
       const groupIds = group.users.map(user => user.id)
       const isMatch =  userListIds.every(id => groupIds.includes(id))
+
+      // length formula means exact group match
       if (isMatch && group.users.length === selectedUsers.length + 1) {
         matchedGroups.push(group);
         exactGroup = group
       } else if (isMatch) {
         matchedGroups.push(group);
       }
+              console.log(matchedGroups)
     })
 
     return {matchedGroups: matchedGroups, exactGroup: exactGroup}
   }
 
   function selectedUsersIds() {
+    // console.log(selectedUsers)
     const userListIds = selectedUsers.map(user => user.id)
     // Make sure current user is in list
     userListIds.push(user.id)
