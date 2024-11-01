@@ -18,10 +18,11 @@ function Messages({ user, setMessage, currentGroup }) {
         return newMessage
     }
 
-    const listUsers = currentGroup.users.map((user) => {
+    const listUsers = currentGroup.users.map((groupUser) => {
+        if (user.id === groupUser.id) return
         return (
-            <li key={user.id}>
-                <h2>{user.email}</h2>
+            <li key={groupUser.id}>
+                <h2>{groupUser.email}</h2>
             </li>
         )
     })
