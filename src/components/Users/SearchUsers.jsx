@@ -34,8 +34,8 @@ function SearchUsers({users, selectedUsers, setSelectedUsers}) {
   }
 
   const listUsers = userList.map(user => 
-    <li key={user.id}>
-      <p onMouseDown={() => handleClick(user.id)}>{user.email}</p>
+    <li key={user.id} onMouseDown={() => handleClick(user.id)}>
+      <p>{user.email}</p>
     </li>
   )
 
