@@ -7,17 +7,24 @@ function SearchUsers({users, selectedUsers, setSelectedUsers}) {
   const [searchInput, setSearchInput] = useState("")
   const defaultSearch = ''
 
+  console.log(userList)
+
   useEffect(() => {
     function findUsers(value) {
       const result = users.filter(user => user.email.toLowerCase().includes(value.toLowerCase()) && !userInList(user))
       setUserList(result)
     }
-    findUsers(searchInput)
+    if (searchInput) return findUsers(searchInput)
+      setUserList([])
   }, [searchInput])
 
   function handleInputFocus() {
-    const result = users.filter(user => !userInList(user))
-    setUserList(result)
+    setUserList(users)
+  }
+
+  function handleOnBlur() {
+    setSearchInput(defaultSearch)
+    setUserList([])
   }
 
   function handleClick(userId) {
@@ -41,11 +48,11 @@ function SearchUsers({users, selectedUsers, setSelectedUsers}) {
       <div className={styles.searchBar}>
         <div>
           <input onChange={e => setSearchInput(e.target.value)} 
-                  onBlur={e => setSearchInput(defaultSearch)} 
-                  onFocus={e => setSearchInput('')} 
+                  onBlur={handleOnBlur} 
+                  onFocus={handleInputFocus} 
                   value={searchInput}
                   placeholder="Search users.." />
-          {searchInput && <ul className={styles.listUsers}>{listUsers}</ul>}
+          {userList.length > 0 && <ul className={styles.listUsers}>{listUsers}</ul>}
         </div>
       </div>
     </div>
