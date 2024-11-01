@@ -30,7 +30,7 @@ function Users({ selectedUsers, setSelectedUsers }) {
     <div className={styles.usersContainer}>
       <div className={styles.selectedUsers}>
       {users && <SearchUsers users={users} selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers}/>}
-      <ul>{listSelectedUsers}</ul>
+      <ul >{listSelectedUsers}</ul>
       </div>
     </div>
   )

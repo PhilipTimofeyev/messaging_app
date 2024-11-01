@@ -4,7 +4,16 @@ import styles from './Users.module.css'
 function SearchUsers({users, selectedUsers, setSelectedUsers}) {
 
   const [userList, setUserList] = useState([])
-  const [searchInput, setSearchInput] = useState("")
+  const [searchInput, setSearchInput] = useState("Search user..")
+  const defaultSearch = 'Search user..'
+
+  useEffect(() => {
+    function findUsers(value) {
+      const result = users.filter(user => user.email.includes(value) && !userInList(user))
+      setUserList(result)
+    }
+    findUsers(searchInput)
+  }, [searchInput])
 
   function handleInputFocus() {
     const result = users.filter(user => !userInList(user))
@@ -13,27 +22,8 @@ function SearchUsers({users, selectedUsers, setSelectedUsers}) {
 
   function handleClick(userId) {
     const selectedUser = users.find((user) => user.id === userId)
-        console.log("COME ON")
     setSelectedUsers([...selectedUsers, selectedUser])
     setUserList([])
-    setSearchInput('')
-  }
-
-  function findUsers(value) {
-    const result = users.filter(user => user.email.includes(value) && !userInList(user))
-    setUserList(result)
-  }
-
-  function handleOnChange(e) {
-    setSearchInput(e.target.value)
-  }
-
-  useEffect(() => {
-    findUsers(searchInput)
-  }, [searchInput])
-
-  function handleOnBlur() {
-    setSearchInput('')
   }
 
   const listUsers = userList.map(user => 
@@ -50,7 +40,10 @@ function SearchUsers({users, selectedUsers, setSelectedUsers}) {
     <div className={styles.searchContainer}>
       <div className={styles.searchBar}>
         <div>
-          <input onChange={handleOnChange} onBlur={handleOnBlur} value={searchInput} defaultValue={'Search user'}/>
+          <input onChange={e => setSearchInput(e.target.value)} 
+                  onBlur={e => setSearchInput(defaultSearch)} 
+                  onFocus={e => setSearchInput('')} 
+                  value={searchInput}/>
           {searchInput && <ul className={styles.listUsers}>{listUsers}</ul>}
         </div>
       </div>
