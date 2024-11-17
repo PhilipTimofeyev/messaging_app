@@ -55,7 +55,6 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
 
   function groupsWithSelectedUsers() {
     const userListIds = selectedUsersIds()
-    // console.log(userListIds)
 
     let matchedGroups = []
     let exactGroup
@@ -71,14 +70,12 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
       } else if (isMatch) {
         matchedGroups.push(group);
       }
-              console.log(matchedGroups)
     })
 
     return {matchedGroups: matchedGroups, exactGroup: exactGroup}
   }
 
   function selectedUsersIds() {
-    // console.log(selectedUsers)
     const userListIds = selectedUsers.map(user => user.id)
     // Make sure current user is in list
     userListIds.push(user.id)

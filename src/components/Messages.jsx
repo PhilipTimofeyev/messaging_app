@@ -10,6 +10,7 @@ function Messages({ user, setMessage, currentGroup }) {
         const content = formData.get('content')
         const newMessage = await createMessage(content)
         setMessage(newMessage)
+        e.target.reset()
     }
 
     async function createMessage(content) {
@@ -33,7 +34,7 @@ function Messages({ user, setMessage, currentGroup }) {
         {currentGroup && <MessagesWindow user={user} currentGroup={currentGroup}/>}
         <form onSubmit={handleSubmit} className={styles.form}>
             <input type='content' name='content'></input>
-            <button type="submit">Send</button>
+            <button type="submit" >Send</button>
         </form>
     </div>
   )
