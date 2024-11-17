@@ -50,6 +50,11 @@
     margin: 0 0 1.8rem auto;
 }
 
+.messageImage img {
+    max-width: 30dvw;
+    border-radius: 10px;
+}
+
 
 .currentUserMessage .messageContent {
     box-sizing: border-box;
