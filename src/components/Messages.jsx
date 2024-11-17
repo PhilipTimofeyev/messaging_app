@@ -40,13 +40,15 @@ function Messages({ user, setMessage, currentGroup }) {
 }
 
 function MessagesWindow({currentGroup, user}) {
-
-    const listMessages = currentGroup.messages.map((message) => {
+    const listMessages = currentGroup.messages.map((message, idx) => {
         const messageUser = currentGroup.users.find(user => user.id === message.user_id)
         const isCurrentUser = user.id == message.user_id
+        let previousUser
+        if (idx > 0) {previousUser = currentGroup.messages[idx - 1].user_id}
+        const isPreviousUser = previousUser === messageUser.id
         return (
             <li key={message.id} className={isCurrentUser ? styles.currentUserMessage : styles.otherUserMessage}>
-                <h5>{messageUser.email}</h5>
+                { !isPreviousUser && <h5>{messageUser.email}</h5>}
                 <p className={styles.messageContent}>{message.content}</p>
             </li>
         )
