@@ -25,7 +25,7 @@ export const axiosInstance = axios.create({
                     const refreshToken = localStorage.getItem('refreshToken'); // Retrieve the stored refresh token.
                     const response = await axios({
                         method: 'post',
-                        url: 'http://127.0.0.1:3000/users/tokens/refresh',
+                        url: `${baseURL}/users/tokens/refresh`,
                         headers: { 'Authorization': 'Bearer ' + refreshToken }
                     })
                     const accessToken = response.data.token
