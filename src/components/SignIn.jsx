@@ -22,7 +22,7 @@ function SignIn({ setUser }) {
         "password": `${password}`
       })
       .then((response) => {
-        setUser(response.data)
+        setUser(response.data.resource_owner)
         localStorage.setItem('accessToken', response.data.token);
         localStorage.setItem('refreshToken', response.data.refresh_token);
         navigate("/")

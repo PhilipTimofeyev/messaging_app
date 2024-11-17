@@ -10,6 +10,7 @@ const PrivateRoute = ({ setUser,  user }) => {
             const response = await checkAuth();
             const statusCode = response.status
             if (statusCode >= 200 && statusCode < 300) {
+                console.log('refresh', response)
                 setUser(response.data)
             } else {
                 navigate("/signin", { error: response })
