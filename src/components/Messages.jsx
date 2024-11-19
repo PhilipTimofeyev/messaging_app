@@ -1,20 +1,22 @@
-import React from 'react'
+import { React, useState } from 'react'
 import styles from './Messages.module.css'
 import { createMessageAPI } from "../helpers/apiCalls.js";
 
-function Messages({ user, setMessage, currentGroup }) {
+function Messages({ user, setMessage, currentGroup, message }) {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        const formData = new FormData(e.target)
-        const content = formData.get('content')
-        const newMessage = await createMessage(content)
+        const formData = new FormData()
+        console.log('IMAGE', e.target.myImage.files[0])
+        formData.append('message[content]', e.target.content.value)
+        formData.append('message[image]', e.target.myImage.files[0])
+        const newMessage = await createMessage(formData)
         setMessage(newMessage)
         e.target.reset()
     }
 
-    async function createMessage(content) {
-        const response = await createMessageAPI(content);
+    async function createMessage(formData) {
+        const response = await createMessageAPI(formData);
         const newMessage = response.data
         return newMessage
     }
@@ -32,8 +34,13 @@ function Messages({ user, setMessage, currentGroup }) {
     <div className={styles.messagesContainer}>
         <ul className={styles.messageUsers}>{listUsers}</ul>
         {currentGroup && <MessagesWindow user={user} currentGroup={currentGroup}/>}
-        <form onSubmit={handleSubmit} className={styles.form}>
+              {/* <button onClick={addImage}>Add Image</button> */}
+          <form onSubmit={handleSubmit} className={styles.form} encType="multipart/form-data">
             <input type='content' name='content'></input>
+              <input
+                  type="file"
+                  name="myImage"
+              />
             <button type="submit" >Send</button>
         </form>
     </div>
@@ -41,6 +48,7 @@ function Messages({ user, setMessage, currentGroup }) {
 }
 
 function MessagesWindow({currentGroup, user}) {
+    console.log(currentGroup)
     const listMessages = currentGroup.messages.map((message, idx) => {
         const messageUser = currentGroup.users.find(user => user.id === message.user_id)
         const isCurrentUser = user.id == message.user_id

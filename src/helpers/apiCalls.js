@@ -68,11 +68,15 @@ export const getGroupAPI = async (groupId) => {
     }
 };
 
-export const createMessageAPI = async (messageContent) => {
+export const createMessageAPI = async (formData) => {
+    console.log('API', formData)
     try {
-        const response = await axiosInstance.post(`/messages`, null, { params: {
-            message: {content: messageContent}
-        }}) ;
+        const response = await axiosInstance.post(`/messages`,
+            formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
         // console.log('Data successfully fetched:', response.data);
         return response
     } catch (error) {
