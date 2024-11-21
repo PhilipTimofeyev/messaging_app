@@ -4,13 +4,16 @@ import { createMessageAPI } from "../helpers/apiCalls.js";
 
 function Messages({ user, setMessage, currentGroup, message }) {
 
+    const [selectedImage, setSelectedImage] = useState()
+
     async function handleSubmit(e) {
         e.preventDefault()
         const formData = new FormData()
         formData.append('message[content]', e.target.content.value)
-        formData.append('message[image]', e.target.myImage.files[0])
+        formData.append('message[image]', selectedImage)
         const newMessage = await createMessage(formData)
         setMessage(newMessage)
+        setSelectedImage('')
         e.target.reset()
     }
 
@@ -18,6 +21,34 @@ function Messages({ user, setMessage, currentGroup, message }) {
         const response = await createMessageAPI(formData);
         const newMessage = response.data
         return newMessage
+    }
+
+    function handleFileChange(e) {
+        setSelectedImage(e.target.files[0])
+    }
+
+    function removeImage() {
+        setSelectedImage('')
+    }
+
+    function AddImage() {
+        if (selectedImage) {
+            return (
+                <p onClick={removeImage}>{selectedImage.name}</p>
+            )
+        } 
+    }
+
+    function MessageForm() {
+        return (
+            <form onSubmit={handleSubmit} className={styles.form} encType="multipart/form-data">
+                <label htmlFor="image"> Add Image</label>
+                <input type="file" name="image" id='image' accept="image/png, image/jpeg" onChange={handleFileChange} hidden />
+                <AddImage />
+                <input type='content' name='content'></input>
+                <button type="submit" >Send</button>
+            </form>
+        )
     }
 
     const listUsers = currentGroup.users.map((groupUser) => {
@@ -33,28 +64,25 @@ function Messages({ user, setMessage, currentGroup, message }) {
     <div className={styles.messagesContainer}>
         <ul className={styles.messageUsers}>{listUsers}</ul>
         {currentGroup && <MessagesWindow user={user} currentGroup={currentGroup}/>}
-              {/* <button onClick={addImage}>Add Image</button> */}
-          <form onSubmit={handleSubmit} className={styles.form} encType="multipart/form-data">
-            <input type='content' name='content'></input>
-              <input
-                  type="file"
-                  name="myImage"
-              />
-            <button type="submit" >Send</button>
-        </form>
+        <MessageForm/>
     </div>
   )
 }
 
 function MessagesWindow({currentGroup, user}) {
-    console.log(currentGroup)
+
     const listMessages = currentGroup.messages.map((message, idx) => {
+
         const messageUser = currentGroup.users.find(user => user.id === message.user_id)
         const isCurrentUser = user.id == message.user_id
         let previousUser
+
+        // set previous user to decide whether to show username above message
         if (idx > 0) {previousUser = currentGroup.messages[idx - 1].user_id}
         const isPreviousUser = previousUser === messageUser.id
+
         return (
+            // styles the message based on if message is current user or other users
             <li key={message.id} className={isCurrentUser ? styles.currentUserMessage : styles.otherUserMessage}>
                 { !isPreviousUser && <h5>{messageUser.email}</h5>}
                 <p className={styles.messageContent}>{message.content}</p>
@@ -65,9 +93,9 @@ function MessagesWindow({currentGroup, user}) {
 
     return (
         <>
-        <div className={styles.messagesWindow}>
-            <ul>{listMessages}</ul>
-        </div>
+            <div className={styles.messagesWindow}>
+                <ul>{listMessages}</ul>
+            </div>
         </>
     )
 }
