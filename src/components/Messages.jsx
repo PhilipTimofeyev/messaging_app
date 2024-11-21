@@ -7,7 +7,6 @@ function Messages({ user, setMessage, currentGroup, message }) {
     async function handleSubmit(e) {
         e.preventDefault()
         const formData = new FormData()
-        console.log('IMAGE', e.target.myImage.files[0])
         formData.append('message[content]', e.target.content.value)
         formData.append('message[image]', e.target.myImage.files[0])
         const newMessage = await createMessage(formData)

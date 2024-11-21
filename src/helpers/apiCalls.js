@@ -69,7 +69,6 @@ export const getGroupAPI = async (groupId) => {
 };
 
 export const createMessageAPI = async (formData) => {
-    console.log('API', formData)
     try {
         const response = await axiosInstance.post(`/messages`,
             formData, {

@@ -23,7 +23,6 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
         return await userGroups.data
       })
       userGroups = await Promise.all(promises)
-      console.log(userGroups)
       userGroupsRef.current = userGroups
       groupsToShow(userGroups)
     }
@@ -105,7 +104,6 @@ function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSele
       } else {
         response = await updateGroup()
       }
-      console.log("RESPONSE", response.data)
       setCurrentGroup(response.data)
       setSelectedUsers([])
     }
