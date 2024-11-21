@@ -31,11 +31,15 @@ function SearchUsers({users, selectedUsers, setSelectedUsers}) {
     setUserList([])
   }
 
-  const listUsers = userList.map(user => 
+  const listUsers = userList.map(user => {
+    if (selectedUsers.some(selectedUser => selectedUser.id == user.id)) return
+
+    return (
     <li key={user.id} onMouseDown={() => handleClick(user.id)}>
       <p>{user.email}</p>
     </li>
-  )
+    )
+  })
 
   function userInList(checkUser) {
     return selectedUsers.find(user => user.id === checkUser.id)
