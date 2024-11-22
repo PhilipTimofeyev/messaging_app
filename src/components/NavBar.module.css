@@ -3,26 +3,22 @@
 .navBar {
     display: flex;
     justify-content: flex-end;
-    padding: 0 10rem;
     background-color: rgb(103, 148, 148);
     height: 6dvh;
 }
 
 .navBar li {
     display: flex;
-/*    gap: 1rem;*/
 }
 
 .navBar a {
-/*    background-color: lightgoldenrodyellow;*/
-/*    color: rgb(103, 148, 148);*/
     padding: .3rem 1rem;
     font-size: 1.3rem;
     font-weight: bold;
     letter-spacing: 1px;
     border-radius: 4px;
-    color: white
-/*    border: solid red;*/
+    color: white;
+    border: 3px solid transparent
 }
 
 .navBar ul {
@@ -33,4 +29,15 @@
 
 a {
     text-decoration: none;
+}
+
+.navBar a:hover {
+    background-color: rgb(44, 115, 115);
+}
+
+@media (max-width: 500px) {
+    .navBar {
+        display: flex;
+        justify-content: center;
+    }
 }

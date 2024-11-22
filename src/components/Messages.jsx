@@ -55,7 +55,7 @@ function Messages({ user, setMessage, currentGroup, message }) {
         if (user.id === groupUser.id) return
         return (
             <li key={groupUser.id}>
-                <h2>{groupUser.email}</h2>
+                <h3>{groupUser.email}</h3>
             </li>
         )
     })

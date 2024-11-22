@@ -12,7 +12,7 @@
 
 .mainPageContainer:last-child {
     /* margin: auto; */
-        margin-right: 20dvw;
+        margin-right: 10%;
     /* width: 20vw; */
 }
 
@@ -23,7 +23,7 @@
     align-items: center;
     /* width: 16vw; */
     height: fit-content;
-    overflow-y: scroll;
+    overflow-y: auto;
     margin-right: auto;
 /*    background-color: rgb(107, 177, 163, .9);*/
     border-right: solid lightgoldenrodyellow 6px ;
@@ -64,8 +64,8 @@
    color: white;
 }
 
-.sidebarGroups ul li:hover {
-    font-size: 1.2rem;
+.sidebarGroups ul ul:hover {
+    background-color: rgb(44, 115, 115);
 }
 
 /* MESSAGES */
@@ -82,10 +82,9 @@
     }
     
     .sidebarContainer {
-        width: 100%;
+        width: 95dvw;
         height: fit-content;
         overflow-y: scroll;
-        /*    background-color: rgb(107, 177, 163, .9);*/
         border-right: solid lightgoldenrodyellow 6px;
         border-radius: 5px;
     }

@@ -5,8 +5,9 @@
     background-color: rgb(103, 148, 148);
     min-width: 55vw;
     height: min-content;
-    /* max-height: 90vh; */
-    /* margin: 4rem 2rem; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
@@ -15,7 +16,6 @@
     box-sizing: border-box;
     background-color: lightgoldenrodyellow;
     padding: 1rem 3rem;
-    /* height: 50dvh; */
     max-height: 50dvh;
     overflow-y: scroll;
 }
@@ -29,14 +29,15 @@
 
 .messageUsers {
     box-sizing: border-box;
+    max-width: 50dvw;
     padding: .9rem 0 0 2rem;
     display: flex;
     gap: 1rem;
-    justify-content: center;
-    overflow-x: scroll;
+    margin: auto;
+    overflow-x: auto;
 }
 
-.messageUsers h2 {
+.messageUsers h3 {
     color: white
 }
 
@@ -89,6 +90,10 @@
     padding: 0;
 }
 
+.messagesWindow li {
+    padding: 0;
+}
+
 
 /* FORM */
 
@@ -98,29 +103,32 @@
     padding: clamp(1rem, 0.3043rem + 3.4783vw, 3rem);
     align-items: center;
     justify-content: center;
-    /* min-width: 400px; */
+    /* margin: auto; */
 }
 
 .form input {
     box-sizing: border-box;
     flex-shrink: 0;
     width: 65%;
-    font-size: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
+    margin: auto;
     padding: .8rem;
     border: none;
     border-radius: 0 0 0 0px;
-    /* height: 3em */
 }
 
 .form button,
 .form label {
-    /* width: 20%; */
     flex-shrink: 0;
-    font-size: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
     padding: .8rem;
     border: none;
     border-radius: 0 10px 10px 0;
     background-color: rgb(211, 225, 211);
+}
+
+.form input,
+.form label,
+.form button {
+    font-size: clamp(.5rem, 0.3043rem + .5783vw, 3rem);
 }
 
 .form label {
@@ -134,24 +142,37 @@
         width: fit-content;
     }
 
-    .messageUsers {
-        /* overflow-x: scroll; */
-        display: flex;
-        flex-direction: column;
-        width: 400px;
+    .messagesWindow {
+        padding: 1rem 1rem;
     }
 
-    .messageUsers h2 {
+    .messageUsers {
+        display: flex;
+        flex-direction: column;
+        max-height: 10dvh;
+        min-height: 6dvh;
+        min-width: 95dvw;
+        overflow-y: auto;
+    }
+
+    .messageUsers h3 {
         margin:0;
         font-size: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
     }
 
     .form input {
-        width: 50%;
+        width: 60%;
     }
 
     .messageImage img {
         min-width: 150px;
+    }
+
+    .form input,
+    .form label,
+    .form button {
+        font-size: .8rem;
+        padding-inline: 7px;
     }
 }
 
