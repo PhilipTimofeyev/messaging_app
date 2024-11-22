@@ -21,8 +21,8 @@ function Users({ selectedUsers, setSelectedUsers }) {
 
   const listSelectedUsers = selectedUsers.map(user =>
     <li key={user.id}>
-      {user.email}
       <span><button onClick={() => removeSelectedUser(user.id)}>X</button></span>
+      {user.email}
     </li>
   )
 

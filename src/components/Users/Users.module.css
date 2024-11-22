@@ -16,31 +16,28 @@
     align-items: center;
 }
 
-
-
 .selectedUsers {
     display: flex;
+    flex-direction: column;
     align-items: center;
-/*    background-color: red;*/
-/*    flex-direction: column;*/
-/*    margin-top: 1rem;*/
-/*    background-color: lightblue;*/
 }
 
 .selectedUsers ul {
     display: flex;
-    gap: 2rem;
+    flex-direction: column;
+    /* gap: 2rem; */
+    max-height: 30dvh;
 }
 
 .listSelectedUsers li {
+    display: flex;
+    gap: 10px;
     background-color: lightgoldenrodyellow;
     padding: 10px 20px;
     border-radius: 10px;
     list-style: none;
     font-weight: bold;
 }
-
-
 
 .searchContainer ul {
     position: absolute;
@@ -62,7 +59,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-/*    min-height: 6rem;*/
     height: 6rem;
     padding: 0 5rem;
 }
@@ -97,6 +93,10 @@ input:placeholder-shown {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
-
+@media (max-width: 500px) {
+    /* .searchBar input {
+        width: 100dvw;
+    } */
+}
 
 

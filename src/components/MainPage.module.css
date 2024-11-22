@@ -2,10 +2,18 @@
 
 .mainPageContainer{
     display: flex;
+    /* width: 100dvw; */
+    /* justify-content: center; */
     /* flex-direction: column; */
 /*    background-color: rgb(255, 255, 224, .6);*/
     /* height: 100vh; */
-    min-height: 9dvh;
+    /* min-height: 9dvh; */
+}
+
+.mainPageContainer:last-child {
+    /* margin: auto; */
+        margin-right: 20dvw;
+    /* width: 20vw; */
 }
 
 .sidebarContainer {
@@ -13,9 +21,10 @@
     margin-top: 2%;
     flex-direction: column;
     align-items: center;
-    width: 16vw;
+    /* width: 16vw; */
     height: fit-content;
     overflow-y: scroll;
+    margin-right: auto;
 /*    background-color: rgb(107, 177, 163, .9);*/
     border-right: solid lightgoldenrodyellow 6px ;
     border-radius: 5px;
@@ -63,4 +72,29 @@
 
 .messageWindow {
     margin: auto;
+}
+
+
+@media (max-width: 500px) {
+    .mainPageContainer{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    
+    .sidebarContainer {
+        width: 100%;
+        height: fit-content;
+        overflow-y: scroll;
+        /*    background-color: rgb(107, 177, 163, .9);*/
+        border-right: solid lightgoldenrodyellow 6px;
+        border-radius: 5px;
+    }
+
+    .sidebarContainer ul {
+        margin: 0;
+    }
+
+    .sidebarContainer li {
+        margin: 1rem auto;
+    }
 }
