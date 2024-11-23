@@ -8,6 +8,23 @@
     margin-right: 10%;
 }
 
+.revealGroupsBtn {
+    padding: .5rem;
+    font-size: 1.2rem;
+    color: #FFF;
+    margin: auto;
+    width: 80dvw;
+    border: solid 1px;
+    border-radius: 10px;
+    margin-top: 20px;
+    background-color: rgb(103, 148, 148);
+    display: none;
+}
+
+.revealGroupsBtn:hover {
+    background-color: rgb(44, 115, 115);
+}
+
 .sidebarContainer {
     display: flex;
     margin-top: 2%;
@@ -30,7 +47,17 @@
 @media (max-width: 500px) {
     .mainPageContainer{
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
+        align-content: center;
+        /* max-width: 400px; */
+    }
+
+    .revealGroupsBtn {
+        display: block;
+    }
+
+    .mainPageContainer:last-child {
+        margin-right: 0;
     }
     
     .sidebarContainer {
@@ -39,6 +66,7 @@
         overflow-y: scroll;
         border-right: solid lightgoldenrodyellow 6px;
         border-radius: 5px;
+        /* display: none; */
     }
 
     .sidebarContainer ul {
