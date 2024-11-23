@@ -16,7 +16,7 @@
     width: 80dvw;
     border: solid 1px;
     border-radius: 10px;
-    margin-top: 20px;
+    margin-top: 5px;
     background-color: rgb(103, 148, 148);
     display: none;
 }
@@ -43,7 +43,7 @@
     margin: auto;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 500px) or (orientation: portrait) {
     .mainPageContainer{
         display: flex;
         flex-direction: column;

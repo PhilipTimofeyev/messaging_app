@@ -60,6 +60,7 @@
     padding: .5rem 2rem;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     width: 100%;
+    max-width: max-content;
     margin-left: auto;
 }
 
@@ -69,7 +70,8 @@
     border-radius: 0 10px 10px 10px;
     padding: .5rem 2rem;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-    width: max-content;
+    max-width: max-content;
+    width: 100%;
     margin-right: auto;
 }
 
@@ -148,10 +150,14 @@
     .messageUsers {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
         max-height: 10dvh;
         min-height: 6dvh;
         min-width: 95dvw;
         overflow-y: auto;
+        gap: 0;
+        margin-bottom: 10px;
     }
 
     .messageUsers h3 {
