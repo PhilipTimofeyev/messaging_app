@@ -21,7 +21,9 @@ function MainPage({ user }) {
   }
 
   useEffect(() => {
-    setShowGroups({ display: 'none' })
+    if (window.innerWidth < window.innerHeight) {
+      setShowGroups({ display: 'none' })
+    }
   }, [currentGroup])
 
   return (

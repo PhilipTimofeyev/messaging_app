@@ -12,7 +12,7 @@
     padding: .5rem;
     font-size: 1.2rem;
     color: #FFF;
-    margin: auto;
+    /* margin: auto; */
     width: 80dvw;
     border: solid 1px;
     border-radius: 10px;
@@ -43,13 +43,11 @@
     margin: auto;
 }
 
-
 @media (max-width: 500px) {
     .mainPageContainer{
         display: flex;
         flex-direction: column;
-        align-content: center;
-        /* max-width: 400px; */
+        align-items: center;
     }
 
     .revealGroupsBtn {
@@ -66,7 +64,8 @@
         overflow-y: scroll;
         border-right: solid lightgoldenrodyellow 6px;
         border-radius: 5px;
-        /* display: none; */
+        margin: 0;
+        display: none;
     }
 
     .sidebarContainer ul {
