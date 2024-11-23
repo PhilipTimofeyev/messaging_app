@@ -5,10 +5,11 @@ function Group({group, user}) {
     return (
       <ul>
         {group.users.map((groupUser) => {
+          const userName = groupUser.email.match(/^[^@]*/gm)
           if (groupUser.id !== user.id)
           return (
             <li key={groupUser.id } >
-              <h4>{groupUser.email}</h4>
+              <h4>{userName}</h4>
             </li>
           )
         })}

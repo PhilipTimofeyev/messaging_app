@@ -33,10 +33,10 @@ function SearchUsers({users, selectedUsers, setSelectedUsers}) {
 
   const listUsers = userList.map(user => {
     if (selectedUsers.some(selectedUser => selectedUser.id == user.id)) return
-
+    const userName = user.email.match(/^[^@]*/gm)
     return (
     <li key={user.id} onMouseDown={() => handleClick(user.id)}>
-      <p>{user.email}</p>
+      <p>{userName}</p>
     </li>
     )
   })

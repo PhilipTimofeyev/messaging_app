@@ -20,10 +20,14 @@ function Users({ selectedUsers, setSelectedUsers }) {
   }
 
   const listSelectedUsers = selectedUsers.map(user =>
-    <li key={user.id}>
-      <span><button onClick={() => removeSelectedUser(user.id)}>X</button></span>
-      {user.email}
-    </li>
+    {const userName = user.email.match(/^[^@]*/gm)
+      return(
+        <li key={user.id}>
+          <span><button onClick={() => removeSelectedUser(user.id)}>X</button></span>
+          { userName }
+        </li>
+      )
+    }
   )
 
   return (
