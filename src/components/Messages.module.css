@@ -99,7 +99,8 @@
 /* FORM */
 
 .form {
-    /* display: flex; */
+    display: grid;
+    grid-template: auto 1fr auto / auto 1fr auto;
     max-height: fit-content;
     padding: clamp(1rem, 0.3043rem + 3.4783vw, 3rem);
     align-items: center;
@@ -109,9 +110,9 @@
 
 .form input {
     box-sizing: border-box;
-    flex-shrink: 0;
-    width: 65%;
-    margin: auto;
+    /* flex-shrink: 1; */
+    /* width: 100%; */
+    /* margin: auto; */
     padding: .8rem;
     border: none;
     border-radius: 0 0 0 0px;
@@ -163,10 +164,6 @@
     .messageUsers h3 {
         margin:0;
         font-size: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
-    }
-
-    .form input {
-        width: 60%;
     }
 
     .messageImage img {
