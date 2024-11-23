@@ -1,7 +1,7 @@
 import { React, useState, useEffect, useRef } from 'react'
 import { addMessageToGroupAPI, createGroupAPI, getGroupAPI, getGroupsAPI } from "../../helpers/apiCalls.js";
 import Group from "./Group.jsx"
-import styles from '../MainPage.module.css'
+import styles from './Groups.module.css'
 
 function Groups({ message, selectedUsers, setCurrentGroup, currentGroup, setSelectedUsers, user }) {
 

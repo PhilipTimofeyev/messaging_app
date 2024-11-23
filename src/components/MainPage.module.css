@@ -2,18 +2,10 @@
 
 .mainPageContainer{
     display: flex;
-    /* width: 100dvw; */
-    /* justify-content: center; */
-    /* flex-direction: column; */
-/*    background-color: rgb(255, 255, 224, .6);*/
-    /* height: 100vh; */
-    /* min-height: 9dvh; */
 }
 
 .mainPageContainer:last-child {
-    /* margin: auto; */
-        margin-right: 10%;
-    /* width: 20vw; */
+    margin-right: 10%;
 }
 
 .sidebarContainer {
@@ -21,54 +13,14 @@
     margin-top: 2%;
     flex-direction: column;
     align-items: center;
-    /* width: 16vw; */
+    max-height: 80dvh;
     height: fit-content;
     overflow-y: auto;
     margin-right: auto;
-/*    background-color: rgb(107, 177, 163, .9);*/
     border-right: solid lightgoldenrodyellow 6px ;
     border-radius: 5px;
 }
 
-/* GROUPS */
-
-.sidebarGroups h1 {
-    text-align: center;
-    color: rgb(103, 148, 148);
-}
-
-.sidebarGroups ul {
-/*    box-sizing: border-box;*/
-    list-style: none;
-    padding: .2rem 1rem;
-    /* width: 100%; */
-    min-height: stretch;
-    margin: 2rem auto;
-    text-align: center;
-}
-
-.sidebarGroups:last-child {
-/*    background-color: black;*/
-    min-width: 20rem;
-}
-
-.sidebarGroups ul ul {
-    background-color: rgb(103, 148, 148);
-    /* margin: 1rem 0; */
-    border-radius: 10px;
-    /* width: 50%; */
-    
-}
-
-.sidebarGroups li {
-   color: white;
-}
-
-.sidebarGroups ul ul:hover {
-    background-color: rgb(44, 115, 115);
-}
-
-/* MESSAGES */
 
 .messageWindow {
     margin: auto;

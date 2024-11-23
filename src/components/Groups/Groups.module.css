@@ -1,0 +1,31 @@
+
+.sidebarGroups h1 {
+    text-align: center;
+    color: rgb(103, 148, 148);
+}
+
+.sidebarGroups ul {
+    list-style: none;
+    padding: .2rem 1rem;
+    min-height: stretch;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.sidebarGroups:last-child {
+    min-width: 20rem;
+}
+
+.sidebarGroups ul ul {
+    background-color: rgb(103, 148, 148);
+    border-radius: 10px;
+
+}
+
+.sidebarGroups li {
+    color: white;
+}
+
+.sidebarGroups ul ul:hover {
+    background-color: rgb(44, 115, 115);
+}
