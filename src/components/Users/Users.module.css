@@ -26,14 +26,18 @@
 .selectedUsers ul {
     display: flex;
     flex-direction: column;
-    /* gap: 2rem; */
     max-height: 30dvh;
+    gap: 5px
+}
+
+.selectedUsers li:hover {
+    background-color: red;
 }
 
 .listSelectedUsers li {
     display: flex;
     gap: 10px;
-    background-color: lightgoldenrodyellow;
+    background-color: rgb(116, 237, 205);
     padding: 10px 20px;
     border-radius: 10px;
     list-style: none;

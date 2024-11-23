@@ -100,7 +100,7 @@
 
 .form {
     /* display: flex; */
-    max-height: 10vh;
+    max-height: fit-content;
     padding: clamp(1rem, 0.3043rem + 3.4783vw, 3rem);
     align-items: center;
     justify-content: center;

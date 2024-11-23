@@ -44,9 +44,9 @@ function Messages({ user, setMessage, currentGroup, message }) {
             <form onSubmit={handleSubmit} className={styles.form} encType="multipart/form-data">
                 <label htmlFor="image"> Add Image</label>
                 <input type="file" name="image" id='image' accept="image/png, image/jpeg" onChange={handleFileChange} hidden />
-                <AddImage />
                 <input type='content' name='content'></input>
                 <button type="submit" >Send</button>
+                <AddImage />
             </form>
         )
     }

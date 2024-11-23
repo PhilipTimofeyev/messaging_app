@@ -22,8 +22,7 @@ function Users({ selectedUsers, setSelectedUsers }) {
   const listSelectedUsers = selectedUsers.map(user =>
     {const userName = user.email.match(/^[^@]*/gm)
       return(
-        <li key={user.id}>
-          <span><button onClick={() => removeSelectedUser(user.id)}>X</button></span>
+        <li key={user.id} onClick={() => removeSelectedUser(user.id)}>
           { userName }
         </li>
       )
