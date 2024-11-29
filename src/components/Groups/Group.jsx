@@ -5,7 +5,8 @@ function Group({group, user}) {
     return (
       <ul>
         {group.users.map((groupUser) => {
-          const userName = groupUser.email.match(/^[^@]*/gm)
+          let userName = groupUser.email.match(/^[^@]*/gm)[0]
+          userName = userName.charAt(0).toUpperCase() + userName.slice(1)
           if (groupUser.id !== user.id)
           return (
             <li key={groupUser.id } >

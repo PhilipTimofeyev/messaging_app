@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useRef } from 'react'
+import { React, useState, useEffect } from 'react'
 import styles from './Users.module.css'
 
 function SearchUsers({users, selectedUsers, setSelectedUsers}) {
@@ -33,7 +33,8 @@ function SearchUsers({users, selectedUsers, setSelectedUsers}) {
 
   const listUsers = userList.map(user => {
     if (selectedUsers.some(selectedUser => selectedUser.id == user.id)) return
-    const userName = user.email.match(/^[^@]*/gm)
+    let userName = user.email.match(/^[^@]*/gm)[0]
+    userName = userName.charAt(0).toUpperCase() + userName.slice(1)
     return (
     <li key={user.id} onMouseDown={() => handleClick(user.id)}>
       <p>{userName}</p>

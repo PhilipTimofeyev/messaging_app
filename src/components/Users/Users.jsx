@@ -19,8 +19,9 @@ function Users({ selectedUsers, setSelectedUsers }) {
     setSelectedUsers(selectedUsers.filter(user => user.id !== userId));
   }
 
-  const listSelectedUsers = selectedUsers.map(user =>
-    {const userName = user.email.match(/^[^@]*/gm)
+  const listSelectedUsers = selectedUsers.map(user =>{
+    let userName = user.email.match(/^[^@]*/gm)[0]
+    userName = userName.charAt(0).toUpperCase() + userName.slice(1)
       return(
         <li key={user.id} onClick={() => removeSelectedUser(user.id)}>
           { userName }

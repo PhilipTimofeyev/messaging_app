@@ -3,7 +3,7 @@ import styles from './Messages.module.css'
 import { createMessageAPI } from "../helpers/apiCalls.js";
 import logo from "../assets/send_logo.png";
 
-function Messages({ user, setMessage, currentGroup, message }) {
+function Messages({ user, setMessage, currentGroup }) {
 
     const [selectedImage, setSelectedImage] = useState()
 
@@ -54,7 +54,8 @@ function Messages({ user, setMessage, currentGroup, message }) {
 
     const listUsers = currentGroup.users.map((groupUser) => {
         if (user.id === groupUser.id) return
-        const userName = groupUser.email.match(/^[^@]*/gm)
+        let userName = groupUser.email.match(/^[^@]*/gm)[0]
+        userName = userName.charAt(0).toUpperCase() + userName.slice(1)
         return (
             <li key={groupUser.id}>
                 <h3>{userName}</h3>
@@ -82,7 +83,8 @@ function MessagesWindow({currentGroup, user}) {
         // set previous user to decide whether to show username above message
         if (idx > 0) {previousUser = currentGroup.messages[idx - 1].user_id}
         const isPreviousUser = previousUser === messageUser.id
-        const userName = messageUser.email.match(/^[^@]*/gm)
+        let userName = messageUser.email.match(/^[^@]*/gm)[0]
+        userName = userName.charAt(0).toUpperCase() + userName.slice(1)
 
         return (
             // styles the message based on if message is current user or other users
