@@ -17,13 +17,14 @@
 }
 
 .sidebarGroups ul ul {
-    background-color: rgb(103, 148, 148);
+    /* background-color: rgb(103, 148, 148); */
+    background-color: rgb(45, 78, 88);
     border-radius: 10px;
 
 }
 
 .sidebarGroups li {
-    color: white;
+    color: gold;
 }
 
 .sidebarGroups ul ul:hover {

@@ -3,7 +3,7 @@
 .navBar {
     display: flex;
     justify-content: space-between;
-    background-color: rgb(103, 148, 148);
+    background-color: rgb(45, 78, 88);
     height: 6dvh;
     width: 100dvw;
 }
@@ -16,9 +16,8 @@
     padding: .3rem .5rem;
     font-size: 1.3rem;
     font-weight: bold;
-    /* letter-spacing: 1px; */
     border-radius: 4px;
-    color: white;
+    color: gold;
     border: 3px solid transparent
 }
 
@@ -34,7 +33,6 @@ a {
 
 .logo {
     display: flex;
-    /* gap: 1rem; */
     align-items: center;
     margin-left: 1rem;
     color: gold;

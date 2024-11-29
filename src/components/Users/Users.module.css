@@ -37,33 +37,34 @@
 .listSelectedUsers li {
     display: flex;
     gap: 10px;
-    background-color: rgb(116, 237, 205);
+    background-color: rgb(45, 78, 88);
     padding: 10px 20px;
     border-radius: 10px;
     list-style: none;
     font-weight: bold;
+    color: gold
 }
 
 .searchContainer ul {
     position: absolute;
-    background-color: lightgoldenrodyellow;
+    background-color: rgb(45, 78, 88);
     overflow-x: auto;
-    height: min-content;
+    /* height: min-content; */
     max-height: 5;
-    padding: 0 2rem;
-    /* width: min-content; */
+    padding: 0;
     border-radius: 10px;
 }
 
 .searchContainer li {
     list-style: none;
     font-weight: bold;
-    padding-inline: 5px;
+    padding: 0 20px;
     border-radius: 10px;
+    color: gold;
 }
 
 .searchContainer li:hover {
-    background-color: rgb(237, 222, 63);
+    background-color: rgb(246, 239, 157);
 }
 
 
