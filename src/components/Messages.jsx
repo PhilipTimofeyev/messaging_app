@@ -1,6 +1,7 @@
 import { React, useState } from 'react'
 import styles from './Messages.module.css'
 import { createMessageAPI } from "../helpers/apiCalls.js";
+import logo from "../assets/send_logo.png";
 
 function Messages({ user, setMessage, currentGroup, message }) {
 
@@ -45,7 +46,7 @@ function Messages({ user, setMessage, currentGroup, message }) {
                 <label htmlFor="image"> Add Image</label>
                 <input type="file" name="image" id='image' accept="image/png, image/jpeg" onChange={handleFileChange} hidden />
                 <input type='content' name='content'></input>
-                <button type="submit" >Send</button>
+                <button type="submit" className={styles.sendBtn}> <img src={logo} className={styles.logo} /></button>
                 <AddImage />
             </form>
         )
