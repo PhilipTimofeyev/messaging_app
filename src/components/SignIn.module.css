@@ -26,10 +26,10 @@ h1 {
 .form input {
     display: flex;    
     font-size: 1.2rem;
-    width: minmax(400px, 15vw);
+    width: max(300px, 10dvw);
     border: none;
     border-radius: 5px;
-    background-color: rgb(238, 238, 238);
+    background-color: #FFF;
 }
 
 .form label {
