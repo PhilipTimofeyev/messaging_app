@@ -7,7 +7,7 @@ import ErrorMessage  from './ErrorMessage.jsx'
 function Register({ setUser }) {
     const [error, setError] = useState()
     const navigate = useNavigate()
-    const url = 'http://127.0.0.1:3000/users/tokens/sign_up'
+    const url = 'https://hermes-messenger-philip-2486f5ed3e35.herokuapp.com/users/tokens/sign_up'
 
     function handleSubmit(e) {
         e.preventDefault();
