@@ -25,9 +25,9 @@ function Register({ setUser }) {
 
             })
             .then((response) => {
-                localStorage.setItem('token', response.data.token);
+                setUser(response.data.resource_owner)
+                localStorage.setItem('accessToken', response.data.token);
                 localStorage.setItem('refreshToken', response.data.refresh_token);
-                setUser(response.data)
                 navigate("/")
             }).catch(error => {
                 setError(error)
