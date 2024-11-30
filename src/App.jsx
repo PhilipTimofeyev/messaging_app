@@ -32,11 +32,11 @@ function App() {
       ],
     },
     {
-      path: "/signin",
+      path: "signin",
       element: <SignIn setUser={setUser}/>,
     },
     {
-      path: "/register",
+      path: "register",
       element: <Register setUser={setUser} />,
     },
   ]);
