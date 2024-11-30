@@ -12,8 +12,6 @@ import NavBar from './components/NavBar';
 function App() {
   const [user, setUser] = useState()
 
-  console.log("APP LOADED")
-
   const router = createBrowserRouter([
     {
       path: "/",

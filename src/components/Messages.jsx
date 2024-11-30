@@ -90,7 +90,7 @@ function MessagesWindow({currentGroup, user}) {
             // styles the message based on if message is current user or other users
             <li key={message.id} className={isCurrentUser ? styles.currentUserMessage : styles.otherUserMessage}>
                 { !isPreviousUser && <h5>{userName}</h5>}
-                <p className={styles.messageContent}>{message.content}</p>
+                {message.content && <p className={styles.messageContent}>{message.content}</p> }
                 {message.image && <p className={styles.messageImage}> <img src={message.image}/></p>}
             </li>
         )
