@@ -12,6 +12,8 @@ import NavBar from './components/NavBar';
 function App() {
   const [user, setUser] = useState()
 
+  console.log("APP LOADED")
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -30,11 +32,11 @@ function App() {
       ],
     },
     {
-      path: "signin",
+      path: "/signin",
       element: <SignIn setUser={setUser}/>,
     },
     {
-      path: "register",
+      path: "/register",
       element: <Register setUser={setUser} />,
     },
   ]);
