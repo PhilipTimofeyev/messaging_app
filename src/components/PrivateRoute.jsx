@@ -8,10 +8,13 @@ const PrivateRoute = ({ setUser,  user }) => {
     useEffect(() => {
         const authenticateUser = async () => {
             const response = await checkAuth();
+            console.log("HERE Response------", response)
+            console.log("HERE STATUS CODE------", response.status > 200)
             const statusCode = response.status
             if (statusCode >= 200 && statusCode < 300) {
                 setUser(response.data)
             } else {
+                console.log("success???")
                 navigate("/signin", { error: response })
             }
         }
