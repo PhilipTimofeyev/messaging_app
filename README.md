@@ -8,7 +8,7 @@
 <h3 align="center">Hermes Messenger</h3>
 
   <p align="center">
-    A messaging app with token authentication built with Rails and React to send and receive messages to users within the app.
+    A messaging app with token authentication built with Rails and React to send and receive messages to users.
     <br />
     <br />
     <a href="https://github.com/PhilipTimofeyev/messaging_app"><strong>Explore the docs »</strong></a>
@@ -196,6 +196,7 @@ Project Link: [https://github.com/PhilipTimofeyev/messaging_app](https://github.
 
 * [README Template](https://github.com/banesullivan/README)
 * [Skill Icons](https://github.com/tandpfun/skill-icons?tab=readme-ov-file#example)
+* Images from https://www.freepik.com/
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
