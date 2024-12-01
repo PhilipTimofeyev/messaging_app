@@ -1,4 +1,4 @@
-<a id="readme-top"></a
+<a id="readme-top"></a>
 <br />
 
 <div align="center">
@@ -6,7 +6,6 @@
     <img src="./src/assets/hermes_logo.png" alt="Logo" width="120" height="120">
   </a>
 <h3 align="center">Hermes Messenger</h3>
-
 
   <p align="center">
     A messaging app with token authentication built with Rails and React to send and receive messages to users within the app.
@@ -17,10 +16,13 @@
     <br />
     <a href="https://hermes-messenger.netlify.app">View Demo</a>
     ·
+      <a href="https://github.com/PhilipTimofeyev/messaging-app-api">Link to Backend API</a>
+    .
     <a href="https://github.com/PhilipTimofeyev/messaging_app/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
     <a href="https://github.com/PhilipTimofeyev/messaging_app/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
+
 </div>
 
 
