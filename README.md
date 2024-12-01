@@ -116,6 +116,14 @@ When the user selects a name, it gets added to a working list of whom the user w
 
 Images may be sent along with text, which are stored using Amazon's S3 service.
 
+##### Responsive Design
+
+Designed to be responsive, switching groups to a dropdown menu when on mobile.
+
+
+
+<img src="./src/assets/github_images/mobile.gif" height="600" />
+
 ### Authentication
 
 The Rails backend uses the Devise and Devise API gems to maintain users, and provision token authentication. 
